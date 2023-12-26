@@ -12,9 +12,6 @@ import "aos/dist/aos.css";
 function App() {
   const [pageLoaded, setPageLoaded] = useState(false);
   useEffect(() => {
-    // window.addEventListener("DOMContentLoaded", () => {
-    //   setTimeout(() => setPageLoaded(true), 1000);
-    // });
     setTimeout(() => setPageLoaded(true), 1000);
     AOS.init({
       duration: 1100,
