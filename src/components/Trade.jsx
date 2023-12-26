@@ -5,13 +5,13 @@ export default function Trade() {
     <section className="text-white px-5 md:px-20 xl:px-28 pt-32 pb-[4.7rem] flex flex-col items-center text-center">
       <h1
         data-aos="fade-up"
-        className="text-3xl md:text-5xl font-aspekta-light-250"
+        className="text-3xl md:text-5xl 2xl:text-6xl font-aspekta-light-250"
       >
         Trade. Refer. Earn with KazeBot
       </h1>
       <p
         data-aos="fade-up"
-        className="mt-8 lg:text-2xl tracking-[-0.03rem] max-w-[58rem] mb-8 lg:mb-16 font-aspekta-light-250"
+        className="mt-8 lg:text-2xl 2xl:text-3xl tracking-[-0.03rem] max-w-[58rem] mb-8 lg:mb-16 font-aspekta-light-250"
       >
         KazeBot allocates fees as follows: 60% for buyback and burn, 10% for the
         team, 20% for the treasury, and 10% for referrals.

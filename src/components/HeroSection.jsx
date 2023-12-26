@@ -18,11 +18,11 @@ export function HeroSection() {
         </video>
       </div>
       <div className="px-5 bg-[#010101]/75 h-screen lg:h-[120vh] w-full absolute top-1/2 z-0 -translate-y-1/2 left-[49.99%] -translate-x-1/2 ">
-        <div className="relative top-1/2 -translate-y-1/2 max-w-[36rem] lg:max-w-[53rem] mx-auto">
-          <span className="hero-gradient-text text-sm sm:text-base font-aspekta-light-350 uppercase border border-[#CAFF59] rounded-[31.25rem] p-[0.625rem]">
+        <div className="relative top-1/2 -translate-y-1/2 max-w-[36rem] lg:max-w-[53rem] 2xl:max-w-[80rem] mx-auto">
+          <span className="hero-gradient-text text-sm sm:text-base 2xl:text-xl font-aspekta-light-350 uppercase border border-[#CAFF59] rounded-[31.25rem] p-[0.625rem]">
             TELEGRAM TRADING BOT
           </span>
-          <h1 className="text-4xl text-white font-aspekta-light-250 lg:text-5xl xl:text-[4rem] xl:leading-[4rem] mt-8">
+          <h1 className="text-4xl text-white font-aspekta-light-250 lg:text-5xl xl:text-[4rem] xl:leading-[4rem] 2xl:text-8xl mt-8">
             Welcome to <span className="font-aspekta-medium">KazeBot</span> -
             the fastest and most convenient way to trade and earn on{" "}
             <span className="text-[#FEF1A7] font-aspekta-medium">

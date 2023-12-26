@@ -1,15 +1,15 @@
 export default function Why() {
   return (
-    <section className="px-5 md:px-20 xl:px-28 text-white bg-[#26272B] pt-24 pb-28">
+    <section className="px-5 md:px-20 xl:px-28 2xl:px-44 text-white bg-[#26272B] pt-24 pb-28">
       <span
         data-aos="fade-up"
-        className="why-gradient-text font-aspekta-medium uppercase border border-[#59D3FF] rounded-[31.25rem] p-[0.625rem]"
+        className="why-gradient-text font-aspekta-medium 2xl:text-xl uppercase border border-[#59D3FF] rounded-[31.25rem] p-[0.625rem]"
       >
         Why you should use kazebot?
       </span>
       <h1
         data-aos="fade-left"
-        className="text-3xl md:text-5xl mb-12 md:mb-16 mt-[1.72rem] font-aspekta-light-250"
+        className="text-3xl md:text-5xl 2xl:text-6xl mb-12 md:mb-16 mt-[1.72rem] font-aspekta-light-250"
       >
         <span>Swap & Snipe. Safely.</span><br />
         <span>
@@ -30,7 +30,7 @@ export default function Why() {
           </h1>
           <p
             data-aos="fade-up"
-            className="tracking-[-0.03rem] font-aspekta-light-250 text-xl lg:text-2xl"
+            className="tracking-[-0.03rem] font-aspekta-light-250 text-xl lg:text-2xl 2xl:text-3xl"
           >
             Time Saved buying on DEX
           </p>
@@ -44,7 +44,7 @@ export default function Why() {
           </h1>
           <p
             data-aos="fade-up"
-            className="tracking-[-0.03rem] font-aspekta-light-250 text-xl lg:text-2xl"
+            className="tracking-[-0.03rem] font-aspekta-light-250 text-xl lg:text-2xl 2xl:text-3xl"
           >
             Top telegram bot on Injective
           </p>
@@ -58,7 +58,7 @@ export default function Why() {
           </h1>
           <p
             data-aos="fade-up"
-            className="tracking-[-0.03rem] font-aspekta-light-250 text-xl lg:text-2xl"
+            className="tracking-[-0.03rem] font-aspekta-light-250 text-xl lg:text-2xl 2xl:text-3xl"
           >
             Active Users
           </p>
