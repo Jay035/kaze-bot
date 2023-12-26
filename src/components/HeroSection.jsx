@@ -12,7 +12,7 @@ export function HeroSection() {
         <video
           loop
           className=""
-          style={{ width: "100%", height: "auto" }}
+          // style={{ width: "100%", height: "auto" }}
           autoPlay
           muted
         >
