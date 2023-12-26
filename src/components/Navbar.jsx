@@ -25,13 +25,13 @@ export default function Navbar() {
         >
           <a
             href="#"
-            className="flex items-center justify-center text-sm sm:text-base lg:text-2xl tracking-[-0.03rem] border border-white bg-transparent text-center text-white p-[0.6rem] rounded-[6.25rem] w-36 lg:w-56 hover:bg-transparent hover:text-white hover:border-white"
+            className="flex items-center justify-center text-sm sm:text-base lg:text-xl tracking-[-0.03rem] border border-white bg-transparent text-center font-aspekta-light-350 text-white p-[0.6rem] rounded-[6.25rem] w-36 lg:w-48 hover:bg-transparent hover:text-white hover:border-white"
           >
             Leaderboard
           </a>
           <a
             href="https://kazebotinj.gitbook.io/kazebot-documentation/"
-            className="flex items-center justify-center text-sm sm:text-base lg:text-2xl tracking-[-0.03rem] border bg-white text-center text-[#131313] font-aspekta-bold p-[0.6rem] rounded-[6.25rem] w-36 lg:w-56 hover:bg-transparent hover:text-white hover:border-white"
+            className="flex items-center justify-center text-sm sm:text-base lg:text-xl tracking-[-0.03rem] border bg-white text-center text-[#131313] font-aspekta-light-350 p-[0.6rem] rounded-[6.25rem] w-36 lg:w-48 hover:bg-transparent hover:text-white hover:border-white"
           >
             Documentation
           </a>

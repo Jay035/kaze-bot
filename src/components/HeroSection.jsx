@@ -5,21 +5,19 @@ export function HeroSection() {
   return (
     <section
       data-aos="fade-in"
-      data-aos-offset="100"
-      className="h-[110vh] lg:h-[120vh] w-full relative overflow-hidden "
+      className="h-screen lg:h-[120vh] w-full relative overflow-hidden "
     >
-      <div className="h-[110vh] lg:h-[120vh] video-container overflow-hidden">
+      <div className="h-screen lg:h-[119vh] video-container overflow-hidden">
         <video
           loop
           className=""
-          // style={{ width: "100%", height: "auto" }}
           autoPlay
           muted
         >
           <source src={videoFile} type="video/mp4" />
         </video>
       </div>
-      <div className="px-5 bg-[#1E1E1E]/80 bg-blend-multiply h-[110vh] lg:h-[120vh] w-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 ">
+      <div className="px-5 bg-[#010101]/90 h-screen lg:h-[120vh] w-full absolute top-1/2 -translate-y-1/2 left-[49.9%] -translate-x-1/2 ">
         <div className="relative top-1/2 -translate-y-1/2 max-w-[36rem] lg:max-w-[53rem] mx-auto">
           <span className="hero-gradient-text text-sm sm:text-base font-aspekta-light-350 uppercase border border-[#CAFF59] rounded-[31.25rem] p-[0.625rem]">
             TELEGRAM TRADING BOT
