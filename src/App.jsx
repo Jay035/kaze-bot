@@ -13,7 +13,7 @@ function App() {
   const [pageLoaded, setPageLoaded] = useState(false);
   useEffect(() => {
     window.addEventListener("load", () => {
-      setTimeout(() => setPageLoaded(true), 2000);
+      setTimeout(() => setPageLoaded(true), 1000);
     });
     AOS.init({
       duration: 1100,
@@ -22,7 +22,7 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-[#010101] relative aspekta-regular">
+    <div className="bg-[#010101] overflow-x-hidden relative aspekta-regular">
       {pageLoaded ? (
         <>
           {" "}
