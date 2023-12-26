@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------- */
+/* FONTS  */
+/* ------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Aspekta Light-250";
+  src: url("/fonts/ttf/Aspekta-250.ttf");
+}
+
+@font-face {
+  font-family: "Aspekta Light-350";
+  src: url("/fonts/ttf/Aspekta-350.ttf");
+}
+
+@font-face {
+  font-family: "Aspekta Regular";
+  src: url("/fonts/ttf/Aspekta-400.ttf");
+}
+
+@font-face {
+  font-family: "Aspekta Medium";
+  src: url("/fonts/ttf/Aspekta-500.ttf");
+}
+
+@font-face {
+  font-family: "Aspekta Bold-750";
+  src: url("/fonts/ttf/Aspekta-750.ttf");
+}
+
+@font-face {
+  font-family: "Aspekta Bold";
+  src: url("/fonts/ttf/Aspekta-700.ttf");
+}
+
+.font-aspekta-light-250 {
+  font-family: "Aspekta Light-250", sans-serif;
+}
+
+.font-aspekta-light-350 {
+  font-family: "Aspekta Light-350", sans-serif;
+}
+
+.font-aspekta-regular {
+  font-family: "Aspekta Regular", sans-serif;
+}
+
+.font-aspekta-medium {
+  font-family: "Aspekta Medium", sans-serif;
+}
+
+.font-aspekta-bold {
+  font-family: "Aspekta Bold", sans-serif;
+}
+
+.font-aspekta-bold-750 {
+  font-family: "Aspekta Bold-750", sans-serif;
+}
+
+/* --------------------------------------------------- */
+.hero-gradient-text {
+  background: linear-gradient(
+    137deg,
+    #caff59 9.07%,
+    #79ffa8 46.25%,
+    #39ffe6 78.36%,
+    #21ffff 93.57%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.features-gradient-text {
+  background: linear-gradient(
+    136deg,
+    #59d3ff 8.2%,
+    #70d8df 19.8%,
+    #bceb79 58.19%,
+    #ecf639 84.98%,
+    #fffb21 97.47%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.why-gradient-text {
+  background: linear-gradient(
+    136deg,
+    #59d3ff 8.2%,
+    #70d8df 19.8%,
+    #bceb79 58.19%,
+    #ecf639 84.98%,
+    #fffb21 97.47%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
