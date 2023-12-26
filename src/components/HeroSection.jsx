@@ -3,7 +3,10 @@ import telegramLogo from "../assets/telegram.svg";
 
 export function HeroSection() {
   return (
-    <section className="h-[120vh] w-full relative overflow-auto ">
+    <section
+      data-aos="fade-in"
+      className="h-[120vh] w-full relative overflow-auto "
+    >
       <div className="h-[120vh] video-container overflow-hidden">
         <video
           className=""

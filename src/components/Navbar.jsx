@@ -5,7 +5,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header>
-      <nav className="absolute overflow-hidden top-0 left-0 z-10 flex justify-between items-center tracking-tight w-full gap-x-12 py-4 md:py-8 pr-5 md:pr-10 xl:px-28">
+      <nav data-aos="fade-in" className="absolute overflow-hidden top-0 left-0 z-10 flex justify-between items-center tracking-tight w-full gap-x-12 py-4 md:py-8 pr-5 md:pr-10 xl:px-28">
         <section className="pl-5 md:pl-10 xl:pl-0">
           <a href="/" className="flex items-center gap-[0.38rem]">
             <img
