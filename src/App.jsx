@@ -23,6 +23,14 @@ function App() {
 
   return (
     <div className="bg-[#010101] overflow-x-hidden relative aspekta-regular">
+      {/* <Loader className={`${pageLoaded && 'hidden'}`} />
+
+      <Navbar />
+      <HeroSection />
+      <Features />
+      <Why />
+      <Trade />
+      <Footer /> */}
       {pageLoaded ? (
         <>
           {" "}

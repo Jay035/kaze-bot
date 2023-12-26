@@ -5,6 +5,7 @@ export function HeroSection() {
   return (
     <section
       data-aos="fade-in"
+      data-aos-offset="100"
       className="h-screen lg:h-[120vh] w-full relative overflow-hidden "
     >
       <div className="h-screen lg:h-[120vh] video-container overflow-hidden">

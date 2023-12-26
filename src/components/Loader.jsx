@@ -1,8 +1,10 @@
-// import logo from "../assets/Logo.svg";
+// import PropTypes from "prop-types";
 
 export default function Loader() {
   return (
-    <div className="flex justify-center items-center min-h-screen animate-pulse">
+    <div
+      className={` flex justify-center items-center min-h-screen animate-pulse`}
+    >
       <svg
         width="81"
         height="70"
@@ -75,3 +77,7 @@ export default function Loader() {
     </div>
   );
 }
+
+// Loader.propTypes = {
+//   className: PropTypes.string.isRequired,
+// };
