@@ -13,16 +13,16 @@ export const FeaturesData = [
     {
         logo: svg2,
         title: "Referrals",
-        subtext: "Refer your friends and earn 30% of their fees in the first month. 20% in the second and 10% forever!"
+        subtext: "Refer your friends and earn 10% of their fees at all time, forever!"
     },
     {
         logo: svg3,
         title: "PNL Overview",
-        subtext: "Easily monitor your positions,  market cap, profit after fees, liquidity, token balance, and recent price changes."
+        subtext: "Easily monitor your positions, market cap, profit after fees, liquidity, token balance, and recent price changes."
     },
     {
         logo: svg4,
         title: "$KBT buy and burn",
-        subtext: "All trade fees are entirely allocated to the purchase of $KBT, while an immediate 10% of the fees result in the burning of $KBT."
+        subtext: "60% of all trade fees are allocated to the purchase & burning of $KBT."
     },
 ]

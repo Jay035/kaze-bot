@@ -5,8 +5,8 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav
-      // data-aos="fade-in"
-      className=" overflow-hidden top-0 left-0 z-[9999999999] flex justify-between items-center tracking-tight w-full gap-x-12 py-4 md:py-8 pr-5 md:pr-10 xl:px-28"
+      data-aos="fade-in"
+      className="absolute top-0 left-0 z-30 flex justify-between items-center tracking-tight w-full gap-x-12 py-4 md:py-8 pr-5 md:pr-10 xl:px-28"
     >
       <section className="pl-5 md:pl-10 xl:pl-0">
         <a href="/" className="flex items-center gap-[0.38rem]">
@@ -14,8 +14,8 @@ export default function Navbar() {
         </a>
       </section>
       <section
-        className={` bg-[#1e1e1e] md:relative absolute top-0 w-full h-screen z-[9999999] md:bg-transparent md:w-fit md:h-fit flex flex-col md:flex-row gap-5 justify-center items-center transition-all ${
-          menuOpen ? "left-0 " : "-left-full md:left-0"
+        className={` bg-[#1e1e1e] md:relative absolute w-full h-screen z-[9999999] md:bg-transparent md:w-fit md:h-fit flex flex-col md:flex-row gap-5 justify-center items-center transition-all ${
+          menuOpen ? "left-0 top-0" : "-left-full md:left-0"
         }`}
       >
         <a
