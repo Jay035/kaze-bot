@@ -4,7 +4,7 @@ import telegramLogo from "../assets/telegram.svg";
 export function HeroSection() {
   return (
     <section className="h-[120vh] w-full relative overflow-auto ">
-      <div className="h-[120vh] overflow-hidden">
+      <div className="h-[120vh] video-container overflow-hidden">
         <video
           className=""
           style={{ width: "100%", height: "auto" }}
@@ -28,7 +28,7 @@ export function HeroSection() {
           </h1>
           <a
             href="https://t.me/KazeOnInjBot?start=861251805"
-            className="mt-12 w-fit gap-[0.625rem] lg:text-2xl text-[#131313] font-aspekta-bold flex items-center p-[0.6rem] lg:p-4 rounded-[6.25rem] bg-[#69FF77]"
+            className="mt-12 w-fit gap-[0.625rem] lg:text-2xl text-[#131313] font-aspekta-bold flex items-center p-[0.6rem] lg:p-4 rounded-[6.25rem] bg-[#69FF77] hover:bg-[#69FF77]/70"
           >
             <img src={telegramLogo} alt="telegram logo" />
             Open Telegram Bot
