@@ -16,11 +16,11 @@ function App() {
       setTimeout(() => setPageLoaded(true), 2000);
     });
     AOS.init({
-      duration: 1200,
+      duration: 1100,
       easing: "ease-in",
     });
   }, []);
-  
+
   return (
     <div className="bg-[#010101] relative aspekta-regular">
       {pageLoaded ? (

@@ -9,6 +9,7 @@ export function HeroSection() {
     >
       <div className="h-[120vh] video-container overflow-hidden">
         <video
+          loop
           className=""
           style={{ width: "100%", height: "auto" }}
           autoPlay
