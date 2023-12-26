@@ -2,7 +2,7 @@
 export default function Footer() {
   return (
     <footer
-      className="pb-10 md:pr-[2.75rem] md:pb-0 border-t border-[#A0A0AB] text-white flex justify-between flex-col md:flex-row items-center"
+      className="pb-10 md:pr-[2.75rem] font-aspekta-light-250 md:pb-0 border-t border-[#A0A0AB] text-white flex justify-between flex-col md:flex-row items-center"
     >
      <div className="flex items-center gap-8 md:gap-0 py-[2.16rem] md:py-0">
       <a href="https://t.co/MgFDBrP3is" className="md:p-6 lg:py-[2.16rem] lg:px-[2.16rem]">TELEGRAM</a>
