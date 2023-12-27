@@ -59,7 +59,7 @@ export default function Why({}: Props) {
             data-aos="fade-up"
             className="text-6xl font-aspekta-bold-750 tracking-[-0.12rem] lg:text-8xl mb-4 lg:mb-[2.06rem]"
           >
-            3100+
+            6100+
           </h1>
           <p
             data-aos="fade-up"
