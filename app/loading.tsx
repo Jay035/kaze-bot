@@ -1,6 +1,8 @@
-// import PropTypes from "prop-types";
+import React from "react";
 
-export default function Loader() {
+type Props = {};
+
+export default function loading({}: Props) {
   return (
     <div
       className={` flex justify-center items-center min-h-screen animate-pulse`}
@@ -77,7 +79,3 @@ export default function Loader() {
     </div>
   );
 }
-
-// Loader.propTypes = {
-//   className: PropTypes.string.isRequired,
-// };

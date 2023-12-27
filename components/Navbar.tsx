@@ -1,29 +1,34 @@
+"use client";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
-import navlogo from "../assets/logo.svg";
 
-export default function Navbar() {
+type Props = {};
+
+export default function Navbar({}: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <nav
       data-aos="fade-in"
       className="absolute top-0 left-0 z-30 flex justify-between items-center tracking-tight w-full gap-x-12 py-4 md:py-8 pr-5 md:pr-10 xl:px-28"
     >
       <section className="pl-5 md:pl-10 xl:pl-0">
-        <a href="/" className="flex items-center gap-[0.38rem]">
-          <img src={navlogo} alt="logo" loading="lazy" className="w-[2.8rem]" />
-        </a>
+        <Link href="/" className="flex items-center gap-[0.38rem]">
+          <Image width={45} height={45} src="/assets/logo.svg" alt="logo" />
+        </Link>
       </section>
       <section
         className={` bg-[#1e1e1e] md:relative absolute w-full h-screen z-[9999999] md:bg-transparent md:w-fit md:h-fit flex flex-col md:flex-row gap-5 justify-center items-center transition-all ${
           menuOpen ? "left-0 top-0" : "-left-full md:left-0"
         }`}
       >
-        <a
-          href="#"
+        <Link
+          href="/leaderboard"
           className="flex items-center justify-center text-sm sm:text-base lg:text-xl tracking-[-0.03rem] border border-white bg-transparent text-center font-aspekta-light-350 text-white p-[0.6rem] rounded-[6.25rem] w-36 lg:w-48 hover:bg-transparent hover:text-white hover:border-white"
         >
           Leaderboard
-        </a>
+        </Link>
         <a
           href="https://kazebotinj.gitbook.io/kaze-bot-documentation/"
           className="flex items-center justify-center text-sm sm:text-base lg:text-xl tracking-[-0.03rem] border bg-white text-center text-[#131313] font-aspekta-light-350 p-[0.6rem] rounded-[6.25rem] w-36 lg:w-48 hover:bg-transparent hover:text-white hover:border-white"

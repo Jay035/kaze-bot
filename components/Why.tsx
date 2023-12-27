@@ -1,4 +1,6 @@
-export default function Why() {
+type Props = {};
+
+export default function Why({}: Props) {
   return (
     <section className="px-5 md:px-20 xl:px-28 2xl:px-44 text-white bg-[#26272B] pt-24 pb-28">
       <span
@@ -11,9 +13,12 @@ export default function Why() {
         data-aos="fade-left"
         className="text-3xl md:text-5xl 2xl:text-6xl mb-12 md:mb-16 mt-[1.72rem] font-aspekta-light-250"
       >
-        <span>Swap & Snipe. Safely.</span><br />
+        <span>Swap & Snipe. Safely.</span>
+        <br />
         <span>
-          Buy, Sell, Manage your <span className="text-[#FEF1A7] font-aspekta-medium">Injective</span> trades easily.
+          Buy, Sell, Manage your{" "}
+          <span className="text-[#FEF1A7] font-aspekta-medium">Injective</span>{" "}
+          trades easily.
         </span>
       </h1>
       <hr className="border-[#51525C]" />

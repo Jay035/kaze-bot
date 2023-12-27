@@ -1,6 +1,8 @@
-import telegramLogo from "../assets/telegram.svg";
+import Image from "next/image";
 
-export default function Trade() {
+type Props = {};
+
+export default function Trade({}: Props) {
   return (
     <section className="text-white px-5 md:px-20 xl:px-28 pt-32 pb-[4.7rem] flex flex-col items-center text-center">
       <h1
@@ -21,7 +23,7 @@ export default function Trade() {
         href="https://t.me/KazeOnInjBot?start=861251805"
         className="mt-12 gap-[0.625rem] w-44 lg:w-[19rem] justify-center lg:text-2xl tracking-[-0.03rem] font-aspekta-medium text-[#131313] font-bold flex items-center lg:h-[4.4rem] p-[0.6rem] rounded-[6.25rem] bg-[#69FF77]"
       >
-        <img src={telegramLogo} alt="telegram logo" />
+        <Image src="/assets/telegram.svg" width={24} height={24} alt="telegram logo" />
         Trade Now
       </a>
     </section>
