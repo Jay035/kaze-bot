@@ -91,7 +91,7 @@ const LeaderboardData = [
   },
 ];
 
-export default function Leaderboard({}: Props) {
+export function Leaderboard({}: Props) {
   return (
     <main
       id="leaderboard"
