@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type Props = {
   username: string;
   referrals: number;
@@ -135,12 +137,38 @@ export default function Leaderboard() {
                 <th
                   // id={data?.id}
                   data-aos="fade-in"
-                  className="text-left text-xl xl:text-2xl w-[40rem] font-aspekta-light-250"
+                  className="text-left text-xl xl:text-2xl w-[40rem] font-aspekta-light-250 flex items-center gap-8"
                 >
                   <span className="text-[#FEF1A7] mr-6 lg:mr-8 font-aspekta-bold-800">
                     {index + 1}.
                   </span>
-                  {data?.username}
+                  <span className="flex items-center gap-5">
+                    {index === 0 && (
+                      <Image
+                        width={48}
+                        height={48}
+                        src="/assets/gold-circle.svg"
+                        alt="circle"
+                      />
+                    )}
+                    {index === 1 && (
+                      <Image
+                        width={48}
+                        height={48}
+                        src="/assets/silver-circle.svg"
+                        alt="circle"
+                      />
+                    )}
+                    {index === 2 && (
+                      <Image
+                        width={48}
+                        height={48}
+                        src="/assets/circle-3.svg"
+                        alt="circle"
+                      />
+                    )}
+                    {data?.username}
+                  </span>
                 </th>
                 <td
                   className="text-[#98A2B3] font-aspekta-light-250 text-xl xl:text-2xl"
