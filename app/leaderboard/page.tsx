@@ -143,32 +143,36 @@ export default function Leaderboard() {
                     {index + 1}.
                   </span>
                   <span className="flex items-center gap-3 md:gap-5">
-                    <div className="w-8">
                     {index === 0 && (
-                      <Image
-                        width={48}
-                        height={48}
-                        src="/assets/gold-circle.svg"
-                        alt="circle"
-                      />
+                      <div className="w-8">
+                        <Image
+                          width={48}
+                          height={48}
+                          src="/assets/gold-circle.svg"
+                          alt="circle"
+                        />
+                      </div>
                     )}
                     {index === 1 && (
-                      <Image
-                        width={48}
-                        height={48}
-                        src="/assets/silver-circle.svg"
-                        alt="circle"
-                      />
+                      <div className="w-8">
+                        <Image
+                          width={48}
+                          height={48}
+                          src="/assets/silver-circle.svg"
+                          alt="circle"
+                        />
+                      </div>
                     )}
                     {index === 2 && (
-                      <Image
-                        width={48}
-                        height={48}
-                        src="/assets/circle-3.svg"
-                        alt="circle"
-                      />
+                      <div className="w-8">
+                        <Image
+                          width={48}
+                          height={48}
+                          src="/assets/circle-3.svg"
+                          alt="circle"
+                        />
+                      </div>
                     )}
-                    </div>
                     {data?.username}
                   </span>
                 </th>
