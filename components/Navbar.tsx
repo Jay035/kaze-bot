@@ -25,6 +25,7 @@ export default function Navbar({}: Props) {
       >
         <Link
           href="/leaderboard"
+          onClick={() => setMenuOpen((prevState) => !prevState)}
           className="flex items-center justify-center text-sm sm:text-base lg:text-xl tracking-[-0.03rem] border border-white bg-transparent text-center font-aspekta-light-350 text-white p-[0.6rem] rounded-[6.25rem] w-36 lg:w-48 hover:bg-transparent hover:text-white hover:border-white"
         >
           Leaderboard
