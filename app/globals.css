@@ -66,11 +66,11 @@
 }
 
 th, td {
-  @apply py-[1.31rem] px-10
+  @apply py-[1.31rem] px-3 md:px-10
 }
 
 th:first-child{
-  @apply pr-28
+  @apply md:pr-28
 }
 
 

@@ -137,12 +137,13 @@ export default function Leaderboard() {
                 <th
                   // id={data?.id}
                   data-aos="fade-in"
-                  className="text-left text-xl xl:text-2xl w-[40rem] font-aspekta-light-250 flex items-center gap-8"
+                  className="text-left md:text-xl xl:text-2xl md:w-[40rem] font-aspekta-light-250 flex items-center gap-2 md:gap-8"
                 >
-                  <span className="text-[#FEF1A7] mr-6 lg:mr-8 font-aspekta-bold-800">
+                  <span className="text-[#FEF1A7] font-aspekta-bold-800">
                     {index + 1}.
                   </span>
-                  <span className="flex items-center gap-5">
+                  <span className="flex items-center gap-3 md:gap-5">
+                    <div className="w-8">
                     {index === 0 && (
                       <Image
                         width={48}
@@ -167,18 +168,19 @@ export default function Leaderboard() {
                         alt="circle"
                       />
                     )}
+                    </div>
                     {data?.username}
                   </span>
                 </th>
                 <td
-                  className="text-[#98A2B3] font-aspekta-light-250 text-xl xl:text-2xl"
+                  className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
                   data-aos="fade-in"
                   //   headers={`project ${data?.id}`}
                 >
                   {data?.referrals}
                 </td>
                 <td
-                  className="text-[#98A2B3] font-aspekta-light-250 text-xl xl:text-2xl"
+                  className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
                   data-aos="fade-in"
                   //   headers={`sale-type ${data?.id}`}
                 >
