@@ -104,27 +104,27 @@ export default function Leaderboard() {
           Leaderboard - <span className="text-[#FEF1A7]">KazeBot</span>
         </span>
       </div>
-      <div className="w-fit md:w-full grid grid-cols-1 mb-24 overflow-x-auto bg-[#111]">
+      <div className="w-full grid grid-cols-1 mb-24 overflow-x-auto bg-[#111]">
         <table className="w-full table-auto">
           <thead className="bg-[#26272B]">
             <tr className="whitespace-nowrap text-left font-aspekta-medium">
               <th
                 data-aos="fade-in"
-                className="text-[#D0D5DD] text-sm lg:text-[1.19rem]"
+                className="text-[#D0D5DD] text-xs lg:text-[1.19rem]"
                 id="telegram-username"
               >
                 TELEGRAM USERNAME
               </th>
               <th
                 data-aos="fade-in"
-                className="text-[#D0D5DD] text-sm lg:text-[1.19rem]"
+                className="text-[#D0D5DD] text-xs lg:text-[1.19rem]"
                 id="referrals"
               >
                 REFERRALS
               </th>
               <th
                 data-aos="fade-in"
-                className="text-[#D0D5DD] text-sm lg:text-[1.19rem]"
+                className="text-[#D0D5DD] text-xs lg:text-[1.19rem]"
                 id="price"
               >
                 POINTS
