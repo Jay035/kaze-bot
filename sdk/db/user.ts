@@ -37,6 +37,15 @@ export async function fetchNewUserById(id: string) {
 }
 export async function getAllUsers() {
 	return await prisma.user.findMany({
-		select: { points: true, id: true, userName: true, tgId: true },
+		select: {
+			points: true,
+			id: true,
+			userName: true,
+			tgId: true,
+			referralCount: true,
+		},
+		where: {
+			referralCount: { gt: 10 },
+		},
 	});
 }
