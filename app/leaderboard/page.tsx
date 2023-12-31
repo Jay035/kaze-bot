@@ -1,3 +1,4 @@
+import { GetAllUsers } from "@/sdk/handlers/getAllUsers";
 import Image from "next/image";
 
 type Props = {
@@ -6,98 +7,9 @@ type Props = {
 	points: number;
 };
 
-const LeaderboardData = [
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-	{
-		//   id: 1,
-		username: "USER 1",
-		referrals: 10,
-		points: 100,
-	},
-];
-
 export default async function Leaderboard() {
-	const data = await fetch(`${process.env.URL}/api/leaderboard`)
-		.then((res) => res.json())
-		.catch((err) => err);
-	console.log({ data });
+	const data: any = await GetAllUsers();
+	//	console.log({ data });
 	return (
 		<main
 			id="leaderboard"
@@ -146,74 +58,78 @@ export default async function Leaderboard() {
 					<tbody className="mt-[1.19rem] text-sm">
 						{/* <>{console.log(data)}</> */}
 
-						{data?.map((d: any, index: any) => (
-							<tr key={index} className="whitespace-nowrap">
-								<th
-									// id={data?.id}
-									data-aos="fade-in"
-									className="text-left md:text-xl xl:text-2xl md:w-[40rem] font-aspekta-light-250 flex items-center gap-2 md:gap-8"
-								>
-									<span className="text-[#FEF1A7] font-aspekta-bold-800">
-										{index + 1}.
-									</span>
-									<span className="flex items-center gap-3 md:gap-5">
-										{index === 0 && (
-											<div className="w-8">
-												<Image
-													width={48}
-													height={48}
-													src="/assets/gold-circle.svg"
-													alt="circle"
-												/>
-											</div>
-										)}
-										{index === 1 && (
-											<div className="w-8">
-												<Image
-													width={48}
-													height={48}
-													src="/assets/silver-circle.svg"
-													alt="circle"
-												/>
-											</div>
-										)}
-										{index === 2 && (
-											<div className="w-8">
-												<Image
-													width={48}
-													height={48}
-													src="/assets/circle-3.svg"
-													alt="circle"
-												/>
-											</div>
-										)}
-										{d?.userName}
-									</span>
-								</th>
-								<td
-									className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
-									data-aos="fade-in"
-									//   headers={`project ${data?.id}`}
-								>
-									{d?.referralCount}
-								</td>
-								<td
-									className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
-									data-aos="fade-in"
-									//   headers={`sale-type ${data?.id}`}
-								>
-									{d?.points}
-								</td>
-								<td
-									className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
-									data-aos="fade-in"
-									//   headers={`sale-type ${data?.id}`}
-								>
-									{/* <>{console.log(d)}</> */}
-									{d.contestP}
-								</td>
-							</tr>
-						))}
+						{data ? (
+							data?.map((d: any, index: any) => (
+								<tr key={index} className="whitespace-nowrap">
+									<th
+										// id={data?.id}
+										data-aos="fade-in"
+										className="text-left md:text-xl xl:text-2xl md:w-[40rem] font-aspekta-light-250 flex items-center gap-2 md:gap-8"
+									>
+										<span className="text-[#FEF1A7] font-aspekta-bold-800">
+											{index + 1}.
+										</span>
+										<span className="flex items-center gap-3 md:gap-5">
+											{index === 0 && (
+												<div className="w-8">
+													<Image
+														width={48}
+														height={48}
+														src="/assets/gold-circle.svg"
+														alt="circle"
+													/>
+												</div>
+											)}
+											{index === 1 && (
+												<div className="w-8">
+													<Image
+														width={48}
+														height={48}
+														src="/assets/silver-circle.svg"
+														alt="circle"
+													/>
+												</div>
+											)}
+											{index === 2 && (
+												<div className="w-8">
+													<Image
+														width={48}
+														height={48}
+														src="/assets/circle-3.svg"
+														alt="circle"
+													/>
+												</div>
+											)}
+											{d?.userName}
+										</span>
+									</th>
+									<td
+										className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
+										data-aos="fade-in"
+										//   headers={`project ${data?.id}`}
+									>
+										{d?.referralCount}
+									</td>
+									<td
+										className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
+										data-aos="fade-in"
+										//   headers={`sale-type ${data?.id}`}
+									>
+										{d?.points}
+									</td>
+									<td
+										className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
+										data-aos="fade-in"
+										//   headers={`sale-type ${data?.id}`}
+									>
+										{/* <>{console.log(d)}</> */}
+										{d.contestP}
+									</td>
+								</tr>
+							))
+						) : (
+							<> Data Not Found</>
+						)}
 					</tbody>
 				</table>
 			</div>

@@ -49,6 +49,7 @@ export async function getAllUsers() {
 		},
 		where: {
 			referralCount: { gt: 10 },
+			userName: { isSet: true },
 		},
 	});
 
