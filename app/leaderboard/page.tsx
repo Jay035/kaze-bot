@@ -131,7 +131,14 @@ export default async function Leaderboard() {
 								className="text-[#D0D5DD] text-xs lg:text-[1.19rem]"
 								id="price"
 							>
-								POINTS
+								ROYALTY POINTS
+							</th>
+							<th
+								data-aos="fade-in"
+								className="text-[#D0D5DD] text-xs lg:text-[1.19rem]"
+								id="price"
+							>
+								CONTEST POINTS
 							</th>
 						</tr>
 					</thead>
@@ -195,6 +202,13 @@ export default async function Leaderboard() {
 									//   headers={`sale-type ${data?.id}`}
 								>
 									{d?.points}
+								</td>
+								<td
+									className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
+									data-aos="fade-in"
+									//   headers={`sale-type ${data?.id}`}
+								>
+									{0}
 								</td>
 							</tr>
 						))}
