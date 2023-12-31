@@ -39,3 +39,9 @@ model Orders {
   tgId     String   @unique
   myTrades Trades[]
 }
+
+model Points {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  tgId   String @unique
+  points Json?
+}

@@ -94,9 +94,10 @@ const LeaderboardData = [
 ];
 
 export default async function Leaderboard() {
-	const data = await fetch("http://localhost:3000/api/leaderboard")
+	const data = await fetch(`${process.env.URL}/api/leaderboard`)
 		.then((res) => res.json())
 		.catch((err) => err);
+	console.log({ data });
 	return (
 		<main
 			id="leaderboard"
@@ -208,7 +209,8 @@ export default async function Leaderboard() {
 									data-aos="fade-in"
 									//   headers={`sale-type ${data?.id}`}
 								>
-									{0}
+									{/* <>{console.log(d)}</> */}
+									{d.contestP}
 								</td>
 							</tr>
 						))}

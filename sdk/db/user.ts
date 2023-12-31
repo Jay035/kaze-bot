@@ -1,4 +1,6 @@
+import { User } from "@prisma/client";
 import { Trader, prisma } from "../";
+import { getAllPoints } from "./points";
 
 export async function createNewUser(
 	tgId: any,
@@ -36,16 +38,19 @@ export async function fetchNewUserById(id: string) {
 	return await prisma.user.findUnique({ where: { tgId: id } });
 }
 export async function getAllUsers() {
-	return await prisma.user.findMany({
+	const users = await prisma.user.findMany({
 		select: {
 			points: true,
 			id: true,
 			userName: true,
 			tgId: true,
 			referralCount: true,
+			referrer: true,
 		},
 		where: {
 			referralCount: { gt: 10 },
 		},
 	});
+
+	return users;
 }
