@@ -62,9 +62,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${aspekta.variable}`}
-      >
+      <head>
+        <link
+          href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+          rel="stylesheet"
+        />
+      </head>
+      <body className={`${aspekta.variable}`}>
         <Navbar />
         <BodyComponent>{children}</BodyComponent>
       </body>
