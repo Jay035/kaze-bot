@@ -1,6 +1,4 @@
-import { User } from "@prisma/client";
 import { Trader, prisma } from "../";
-import { getAllPoints } from "./points";
 
 export async function createNewUser(
 	tgId: any,

@@ -1,5 +1,6 @@
 import { getAllUsers } from "@/sdk/db/user";
 import { getAllPoints } from "@/sdk/db/points";
+import { PrismaClient } from "@prisma/client";
 
 function objectModifier(object: any, fieldName: string, value: any) {
 	if (object.hasOwnProperty(fieldName)) {
@@ -13,10 +14,11 @@ function objectModifier(object: any, fieldName: string, value: any) {
 	return object;
 }
 export async function GetAllUsers() {
+	const prisma = new PrismaClient();
 	try {
 		let res = await getAllUsers();
 		//	console.log({ res });
-		const b = res.map(async (el) => {
+		const b = res.map(async (el: any) => {
 			const p = await getAllPoints(el.tgId);
 			const a: any = p?.points;
 			if (a) {
