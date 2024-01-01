@@ -70,7 +70,7 @@ th, td {
 }
 
 th:first-child{
-  @apply md:pr-28
+  @apply md:pr-16
 }
 
 

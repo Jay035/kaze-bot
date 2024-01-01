@@ -15,7 +15,7 @@ export default function Navbar({}: Props) {
     >
       <section className="pl-5 md:pl-10 xl:pl-0">
         <Link href="/" className="flex items-center gap-[0.38rem]">
-          <Image width={45} height={45} src="/assets/logo.svg" alt="logo" />
+          <Image placeholder="blur" blurDataURL={"/assets/logo.svg"} className="w-11 h-auto" width="0" height="0" src="/assets/logo.svg" alt="logo" />
         </Link>
       </section>
       <section

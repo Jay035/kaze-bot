@@ -13,6 +13,8 @@ export default function LeaderboardTable({ data }: any) {
     useState(false);
   const [isContestPointInAscendingOrder, setIsContestPointInAscendingOrder] =
     useState(false);
+  const [isReferralInAscendingOrder, setIsReferralInAscendingOrder] =
+    useState(false);
 
   const toggleRoyaltyPoints = () => {
     setIsRoyaltyPointInAscendingOrder((prevState) => !prevState);
@@ -21,6 +23,10 @@ export default function LeaderboardTable({ data }: any) {
   const toggleContestPoints = () => {
     setIsContestPointInAscendingOrder((prevState) => !prevState);
   };
+
+  const toggleReferral = () => {
+    setIsReferralInAscendingOrder((prevState) => !prevState);
+  };
   return (
     <div className="w-full grid grid-cols-1 mb-24 overflow-x-auto bg-[#111]">
       <table className="w-full table-auto">
@@ -28,17 +34,25 @@ export default function LeaderboardTable({ data }: any) {
           <tr className="whitespace-nowrap text-left font-aspekta-medium ">
             <th
               data-aos="fade-in"
-              className="text-[#D0D5DD] text-xs lg:text-[1.19rem] "
+              className="text-[#D0D5DD] w-fit text-xs lg:text-[1.19rem] "
               id="telegram-username"
             >
               TELEGRAM USERNAME
             </th>
             <th
               data-aos="fade-in"
-              className="text-[#D0D5DD] text-xs lg:text-[1.19rem] "
+              className="text-[#D0D5DD] text-xs lg:text-[1.19rem] cursor-pointer"
               id="referrals"
+              onClick={toggleReferral}
             >
               REFERRALS
+              <i
+                className={`ml-1 ${
+                  isReferralInAscendingOrder
+                    ? "ri-arrow-down-s-line"
+                    : "ri-arrow-up-s-line"
+                }`}
+              ></i>
             </th>
             <th
               data-aos="fade-in"
@@ -73,7 +87,7 @@ export default function LeaderboardTable({ data }: any) {
           </tr>
         </thead>
         <tbody className="mt-[1.19rem] text-sm">
-          <>{console.log(data)}</>
+          {/* <>{console.log(data)}</> */}
 
           {data ? (
             data?.map((d: any, index: any) => (
