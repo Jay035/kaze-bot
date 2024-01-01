@@ -1,5 +1,6 @@
 import { GetAllUsers } from "@/sdk/handlers/getAllUsers";
 import Image from "next/image";
+import LeaderboardTable from "./components/LeaderboardTable";
 
 type Props = {
   username: string;
@@ -9,7 +10,8 @@ type Props = {
 
 export default async function Leaderboard() {
   const data: any = await GetAllUsers();
-  console.log({ data });
+//   console.log({ data });
+
   return (
     <main
       id="leaderboard"
@@ -20,7 +22,7 @@ export default async function Leaderboard() {
           Leaderboard - <span className="text-[#FEF1A7]">KazeBot</span>
         </span>
       </div>
-      <div className="w-full grid grid-cols-1 mb-24 overflow-x-auto bg-[#111]">
+      {/* <div className="w-full grid grid-cols-1 mb-24 overflow-x-auto bg-[#111]">
         <table className="w-full table-auto">
           <thead className="bg-[#26272B]">
             <tr className="whitespace-nowrap text-left font-aspekta-medium flex ">
@@ -129,7 +131,8 @@ export default async function Leaderboard() {
             )}
           </tbody>
         </table>
-      </div>
+      </div> */}
+      <LeaderboardTable data={data} />
     </main>
   );
 }
