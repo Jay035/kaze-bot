@@ -191,7 +191,7 @@ export default function LeaderboardTable({ data }: any) {
       <div className="my-16 flex justify-center items-center gap-8">
         {/* add this to the button classname for disabled state */}
         {/* opacity-50 */}
-        <button className="bg-[#98A2B3] hover:bg-[#98A2B3] h-8 md:h-10 w-8 md:w-10 rounded-full">
+        <button className="bg-[#98A2B3] hover:bg-[#b7c0d1] h-8 md:h-10 w-8 md:w-10 rounded-full">
           <i className="ri-arrow-left-s-line font-semibold text-black text-xl"></i>
         </button>
         <button className="bg-[#98A2B3] hover:bg-[#b7c0d1] h-8 md:h-10 w-8 md:w-10 rounded-full">
