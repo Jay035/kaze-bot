@@ -3,26 +3,27 @@ import Image from "next/image";
 import LeaderboardTable from "./components/LeaderboardTable";
 
 type Props = {
-  username: string;
-  referrals: number;
-  points: number;
+	username: string;
+	referrals: number;
+	points: number;
 };
 
 export default async function Leaderboard() {
-  const data: any = await GetAllUsers();
-//   console.log({ data });
+	const data: any = await GetAllUsers(0);
+	//   console.log({ data });
 
-  return (
-    <main
-      id="leaderboard"
-      className="px-5 md:px-20 xl:px-28 2xl:px-44 text-white mt-32 xl:mt-44 h-full min-h-screen"
-    >
-      <div className="mb-24">
-        <span className="tracking-[-0.05rem] font-aspekta-light-250 text-3xl lg:text-[2.5rem]">
-          Leaderboard - <span className="text-[#FEF1A7]">KazeBot</span>
-        </span>
-      </div>
-      {/* <div className="w-full grid grid-cols-1 mb-24 overflow-x-auto bg-[#111]">
+	return (
+		<main
+			id="leaderboard"
+			className="px-5 md:px-20 xl:px-28 2xl:px-44 text-white mt-32 xl:mt-44 h-full min-h-screen"
+		>
+			<div className="mb-24">
+				<span className="tracking-[-0.05rem] font-aspekta-light-250 text-3xl lg:text-[2.5rem]">
+					Leaderboard -{" "}
+					<span className="text-[#FEF1A7]">KazeBot</span>
+				</span>
+			</div>
+			{/* <div className="w-full grid grid-cols-1 mb-24 overflow-x-auto bg-[#111]">
         <table className="w-full table-auto">
           <thead className="bg-[#26272B]">
             <tr className="whitespace-nowrap text-left font-aspekta-medium flex ">
@@ -132,7 +133,7 @@ export default async function Leaderboard() {
           </tbody>
         </table>
       </div> */}
-      <LeaderboardTable data={data} />
-    </main>
-  );
+			<LeaderboardTable data={data} />
+		</main>
+	);
 }

@@ -33,10 +33,15 @@ export async function updateUser(id: string, updateData: Partial<Trader>) {
 	return await prisma.user.update({ where: { tgId: id }, data: updateData });
 }
 export async function fetchNewUserById(id: string) {
-	return await prisma.user.findUnique({ where: { tgId: id } });
+	return await prisma.user.findUnique({
+		where: { tgId: id },
+		select: { userName: true, points: true, referralCount: true },
+	});
 }
-export async function getAllUsers() {
+export async function getAllUsers(nextSkip: number) {
 	const users = await prisma.user.findMany({
+		skip: nextSkip,
+		take: 120,
 		select: {
 			points: true,
 			id: true,
@@ -44,9 +49,6 @@ export async function getAllUsers() {
 			tgId: true,
 			referralCount: true,
 			referrer: true,
-		},
-		where: {
-			referralCount: { gt: 10 },
 		},
 	});
 

@@ -13,10 +13,10 @@ function objectModifier(object: any, fieldName: string, value: any) {
 
 	return object;
 }
-export async function GetAllUsers() {
+export async function GetAllUsers(nextSkip: number) {
 	const prisma = new PrismaClient();
 	try {
-		let res = await getAllUsers();
+		let res = await getAllUsers(nextSkip);
 		//	console.log({ res });
 		const b = res.map(async (el: any) => {
 			const p = await getAllPoints(el.tgId);
