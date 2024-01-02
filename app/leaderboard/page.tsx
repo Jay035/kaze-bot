@@ -1,5 +1,4 @@
 import { GetAllUsers } from "@/sdk/handlers/getAllUsers";
-import Image from "next/image";
 import LeaderboardTable from "./components/LeaderboardTable";
 
 type Props = {
@@ -10,12 +9,11 @@ type Props = {
 
 export default async function Leaderboard() {
 	const data: any = await GetAllUsers(0);
-	//   console.log({ data });
 
 	return (
 		<main
 			id="leaderboard"
-			className="px-5 md:px-20 xl:px-28 2xl:px-44 text-white mt-32 xl:mt-44 h-full min-h-screen"
+			className="px-5 md:px-20 2xl:px-44 text-white mt-32 xl:mt-44 h-full min-h-screen"
 		>
 			<div className="mb-24">
 				<span className="tracking-[-0.05rem] font-aspekta-light-250 text-3xl lg:text-[2.5rem]">

@@ -58,19 +58,16 @@
 }
 
 #leaderboard tr:nth-child(even) {
- @apply bg-[#18181B]
+  @apply bg-[#18181B];
 }
 
 #leaderboard tr:hover {
- @apply bg-[#2a2a2fdb]
+  @apply bg-[#2a2a2fdb];
 }
 
-th, td {
-  @apply py-[1.31rem] px-3 md:px-10
-}
-
-th:first-child{
-  @apply md:pr-16
+th,
+td {
+  @apply py-[1.31rem] px-3 md:px-5 w-fit;
 }
 
 
@@ -96,14 +93,11 @@ th:first-child{
 }
 
 .table-loader {
-  border: 8px solid #f3f3f3; /* Light grey */
-  border-top: 8px solid #98A2B3; /* Blue */
-  border-radius: 50%;
-  @apply w-16 h-16 mx-auto;
+  @apply w-16 h-16 mx-auto border-8 border-[#f3f3f3] border-t-[#98A2B3] rounded-[50%] animate-spin;
   animation: spin 2s linear infinite;
 }
 
-@keyframes spin {
+/* @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
+} */
