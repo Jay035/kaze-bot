@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   username: string;
@@ -21,6 +21,8 @@ function sortByContestPoints(data: any) {
     (a: any, b: any) => parseInt(b.contestP) - parseInt(a.contestP)
   );
 }
+
+//
 export default function LeaderboardTable({ data }: any) {
   const [userData, setUserData]: any = useState();
   const [isRoyaltyPointInAscendingOrder, setIsRoyaltyPointInAscendingOrder] =
@@ -110,9 +112,7 @@ export default function LeaderboardTable({ data }: any) {
             </tr>
           </thead>
           <tbody className="mt-[1.19rem] text-sm max-h-20 h-fit">
-            {/* <>{console.log(data)}</> */}
-
-            {userData ? (
+            {userData?.length > 0 ? (
               userData?.map((d: any, index: any) => (
                 <tr key={index} className="whitespace-nowrap">
                   <th
@@ -181,18 +181,20 @@ export default function LeaderboardTable({ data }: any) {
                 </tr>
               ))
             ) : (
-              <> Data Not Found</>
+              <div className="my-8 flex justify-center items-center">
+                <span className=" table-loader"></span>
+              </div>
             )}
           </tbody>
         </table>
       </div>
-      <div className="mt-16 flex justify-center items-center gap-8">
+      <div className="my-16 flex justify-center items-center gap-8">
         {/* add this to the button classname for disabled state */}
         {/* opacity-50 */}
-        <button className="bg-[#98A2B3] hover:bg-[#98A2B3] h-8 md:h-10 w-8 md:w-8 rounded-full">
+        <button className="bg-[#98A2B3] hover:bg-[#98A2B3] h-8 md:h-10 w-8 md:w-10 rounded-full">
           <i className="ri-arrow-left-s-line font-semibold text-black text-xl"></i>
         </button>
-        <button className="bg-[#98A2B3] hover:bg-[#b7c0d1] h-8 md:h-10 w-8 md:w-8 rounded-full">
+        <button className="bg-[#98A2B3] hover:bg-[#b7c0d1] h-8 md:h-10 w-8 md:w-10 rounded-full">
           <i className="ri-arrow-right-s-line font-semibold text-black text-xl"></i>
         </button>
       </div>
