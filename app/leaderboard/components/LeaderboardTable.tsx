@@ -67,7 +67,7 @@ export default function LeaderboardTable({ data }: any) {
   // -------------------------------------------------------
   // PAGINATION 
   // const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 15;
+  const itemsPerPage = 20;
   // const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   // const [recordsPerPage] = useState(15);
