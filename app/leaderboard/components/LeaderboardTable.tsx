@@ -70,7 +70,7 @@ export default function LeaderboardTable({ data }: any) {
 	<div className="w-full">
 
     <div className="grid grid-cols-1 mb-24 overflow-x-auto w-full text-left">
-      <table className=" bg-[#111]">
+      <table className="w-full bg-[#111]">
         <thead className="bg-[#26272B]">
           <tr className="font-aspekta-medium">
             <th
@@ -128,10 +128,10 @@ export default function LeaderboardTable({ data }: any) {
             </th>
           </tr>
         </thead>
-        <tbody className="mt-[1.19rem] text-sm w-fit">
+        <tbody className="mt-[1.19rem] text-sm ">
           {userData?.length > 0 ? (
             userData?.map((d: any, index: any) => (
-              <tr key={index} className="w-fit">
+              <tr key={index} className="w-full">
                 <th
                   data-aos="fade-in"
                   className="md:text-xl xl:text-2xl font-aspekta-light-250 w-fit flex items-center gap-2 md:gap-8"

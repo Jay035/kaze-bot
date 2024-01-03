@@ -5,7 +5,7 @@ type Props = {};
 export default function loading({}: Props) {
   return (
     <div
-      className={` flex justify-center items-center min-h-screen animate-pulse`}
+      className={` flex justify-center items-center min-h-screen animate-pulse z-50`}
     >
       <svg
         width="81"
