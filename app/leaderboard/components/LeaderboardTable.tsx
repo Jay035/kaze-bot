@@ -18,15 +18,14 @@ function sortByReferral(data: any) {
 function sortByRoyaPoints(data: any) {
   return data.sort((a: any, b: any) => parseInt(b.points) - parseInt(a.points));
 }
+
 function sortByContestPoints(data: any) {
-  //console.log(first)
   const d = data.sort(
     (a: any, b: any) => parseInt(b.contestP) - parseInt(a.contestP)
   );
   return d.filter((el: any) => parseFloat(el.contestP) > 0);
 }
 
-//
 export default function LeaderboardTable({ data }: any) {
   const [userData, setUserData]: any = useState();
   const [isRoyaltyPointInAscendingOrder, setIsRoyaltyPointInAscendingOrder] =
@@ -64,26 +63,28 @@ export default function LeaderboardTable({ data }: any) {
     setIsReferralInAscendingOrder((prevState) => !prevState);
   };
 
-  const [itemOffset, setItemOffset] = useState(0);
+
+  // -------------------------------------------------------
+  // PAGINATION 
+  const [currentPage, setCurentPage] = useState(0);
   const itemsPerPage = 10;
 
-  const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = userData?.slice(itemOffset, endOffset);
+  const pagesVisited = currentPage + itemsPerPage;
+  console.log(`Loading items from ${currentPage} to ${pagesVisited}`);
+  const currentItems = userData?.slice(currentPage, pagesVisited);
   const pageCount = Math.ceil(userData?.length / itemsPerPage);
 
-  // Invoke when user click to request another page.
-  const handlePageClick = (event: any) => {
+  const handlePaginationButtonClick = (event: any) => {
     const newOffset = (event.selected * itemsPerPage) % userData.length;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
-    setItemOffset(newOffset);
+    setCurentPage(newOffset);
   };
 
   useEffect(() => {
     setUserData(sortByReferral(data));
-    console.log(data);
+    // console.log(data);
   }, []);
 
   return userData ? (
@@ -232,7 +233,7 @@ export default function LeaderboardTable({ data }: any) {
         <ReactPaginate
           breakLabel="..."
           nextLabel=">"
-          onPageChange={handlePageClick}
+          onPageChange={handlePaginationButtonClick}
           pageRangeDisplayed={5}
           pageCount={pageCount}
           previousLabel="< "
