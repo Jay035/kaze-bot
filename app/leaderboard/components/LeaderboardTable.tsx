@@ -66,8 +66,17 @@ export default function LeaderboardTable({ data }: any) {
 
   // -------------------------------------------------------
   // PAGINATION 
-  const [currentPage, setCurentPage] = useState(0);
-  const itemsPerPage = 10;
+  // const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 15;
+  // const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  // const [recordsPerPage] = useState(15);
+
+  // const indexOfLastRecord = currentPage * recordsPerPage;
+  // const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  // const currentRecords = userData?.slice(indexOfFirstRecord, indexOfLastRecord);
+  // const nPages = Math.ceil(userData?.length / recordsPerPage)
+
 
   const pagesVisited = currentPage + itemsPerPage;
   console.log(`Loading items from ${currentPage} to ${pagesVisited}`);
@@ -79,8 +88,11 @@ export default function LeaderboardTable({ data }: any) {
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
-    setCurentPage(newOffset);
+    setCurrentPage(newOffset);
   };
+
+
+
 
   useEffect(() => {
     setUserData(sortByReferral(data));
@@ -230,13 +242,18 @@ export default function LeaderboardTable({ data }: any) {
         <button className="bg-[#98A2B3] hover:bg-[#b7c0d1] h-8 md:h-10 w-8 md:w-10 rounded-full">
           <i className="ri-arrow-right-s-line font-semibold text-black text-xl"></i>
         </button> */}
+        {/* <Pagination
+                nPages={nPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+            /> */}
         <ReactPaginate
           breakLabel="..."
           nextLabel=">"
           onPageChange={handlePaginationButtonClick}
           pageRangeDisplayed={5}
           pageCount={pageCount}
-          previousLabel="< "
+          previousLabel="<"
           renderOnZeroPageCount={null}
           containerClassName={"paginationBtns"}
           previousLinkClassName={"previousBtn"}
