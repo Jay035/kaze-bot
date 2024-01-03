@@ -11,10 +11,12 @@
 	},
 	"dependencies": {
 		"@prisma/client": "^5.7.1",
+		"@types/react-paginate": "^7.1.4",
 		"aos": "^2.3.4",
 		"next": "14.0.4",
 		"react": "^18",
 		"react-dom": "^18",
+		"react-paginate": "^8.2.0",
 		"swr": "^2.2.4"
 	},
 	"devDependencies": {
