@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import "../../pagination.css";
+import { useRouter, useSearchParams } from "next/navigation";
+import { PaginationControls } from "./Pagination";
 
 type Props = {
   username: string;
@@ -26,8 +28,15 @@ function sortByContestPoints(data: any) {
   return d.filter((el: any) => parseFloat(el.contestP) > 0);
 }
 
-export default function LeaderboardTable({ data }: any) {
+export default function LeaderboardTable({
+  data,
+}: // end,
+// start,
+// perPage,
+// page,
+any) {
   const [userData, setUserData]: any = useState();
+  // const entries = userData?.slice(start, end);
   const [loading, setLoading] = useState<boolean>(false);
   const [isRoyaltyPointInAscendingOrder, setIsRoyaltyPointInAscendingOrder] =
     useState(false);
@@ -35,20 +44,24 @@ export default function LeaderboardTable({ data }: any) {
     useState(false);
   const [isReferralInAscendingOrder, setIsReferralInAscendingOrder] =
     useState(false);
+  // ------ Loading
+  const startLoading = () => setLoading(true);
+  const stopLoading = () => setLoading(false);
 
   const toggleRoyaltyPoints = () => {
-    setLoading(true);
+    startLoading();
+    setCurrentPage(1);
     // update data after sorting
     setUserData(sortByRoyaPoints(data));
     setTimeout(() => {
-      setLoading(false);
+      stopLoading();
     }, 500);
-    console.log(userData);
     setIsRoyaltyPointInAscendingOrder((prevState) => !prevState);
   };
 
   const toggleContestPoints = () => {
-    setLoading(true);
+    startLoading();
+    setCurrentPage(1);
     let url = "https://kaze-api.onrender.com/api/points";
 
     let options = {
@@ -62,14 +75,14 @@ export default function LeaderboardTable({ data }: any) {
         // update data after sorting
         setUserData(sortByContestPoints(json.data));
         setTimeout(() => {
-          setLoading(false);
-        }, 1000);
+          stopLoading();
+        }, 500);
         console.log(userData);
       })
       .catch((err) => {
         console.error("error:" + err);
         setTimeout(() => {
-          setLoading(false);
+          stopLoading();
         }, 1000);
       });
 
@@ -77,13 +90,13 @@ export default function LeaderboardTable({ data }: any) {
   };
 
   const toggleReferral = () => {
-    setLoading(true);
+    startLoading();
+    setCurrentPage(1);
     // update data after sorting
     setUserData(sortByReferral(data));
     setTimeout(() => {
-      setLoading(false);
+      stopLoading();
     }, 1000);
-    console.log(userData);
     setIsReferralInAscendingOrder((prevState) => !prevState);
   };
 
@@ -247,14 +260,16 @@ export default function LeaderboardTable({ data }: any) {
             </table>
           </div>
           <div className="mb-16 flex justify-center items-center gap-8">
-            {/* add this to the button classname for disabled state */}
-            {/* opacity-50 */}
             {/* <button className="bg-[#98A2B3] hover:bg-[#b7c0d1] h-8 md:h-10 w-8 md:w-10 rounded-full">
               <i className="ri-arrow-left-s-line font-semibold text-black text-xl"></i>
             </button>
             <button className="bg-[#98A2B3] hover:bg-[#b7c0d1] h-8 md:h-10 w-8 md:w-10 rounded-full">
               <i className="ri-arrow-right-s-line font-semibold text-black text-xl"></i>
             </button> */}
+            {/* <PaginationControls
+              hasNextPage={end < userData?.length}
+              hasPrevPage={start > 0}
+            /> */}
 
             <ReactPaginate
               breakLabel="..."

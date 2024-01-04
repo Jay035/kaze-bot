@@ -1,14 +1,17 @@
 import { GetAllUsers } from "@/sdk/handlers/getAllUsers";
 import LeaderboardTable from "./components/LeaderboardTable";
 
-type Props = {
-  username: string;
-  referrals: number;
-  points: number;
-};
-
-export default async function Leaderboard() {
+export default async function Leaderboard({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const data: any = await GetAllUsers(0);
+  const page = searchParams["page"] ?? "1";
+  const per_page = searchParams["per_page"] ?? "20";
+
+  const start = (Number(page) - 1) * Number(per_page); // 0, 20, 40 ...
+  const end = start + Number(per_page); // 5, 10, 15 ...
 
   return (
     <main
@@ -20,7 +23,7 @@ export default async function Leaderboard() {
           Leaderboard - <span className="text-[#FEF1A7]">KazeBot</span>
         </span>
       </div>
-      <LeaderboardTable data={data} />
+      <LeaderboardTable data={data} page={page} perPage={per_page} start={start} end={end} />
     </main>
   );
 }
