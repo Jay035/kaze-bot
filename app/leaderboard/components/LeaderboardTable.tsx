@@ -77,7 +77,7 @@ any) {
         setTimeout(() => {
           stopLoading();
         }, 500);
-        console.log(userData);
+        // console.log(json?.data);
       })
       .catch((err) => {
         console.error("error:" + err);
