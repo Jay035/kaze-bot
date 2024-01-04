@@ -105,7 +105,7 @@ any) {
   const itemsPerPage = 20;
   const [currentPage, setCurrentPage] = useState(1);
   const pagesVisited = currentPage + itemsPerPage;
-  console.log(`Loading items from ${currentPage} to ${pagesVisited}`);
+  // console.log(`Loading items from ${currentPage} to ${pagesVisited}`);
   const currentItems = userData?.slice(currentPage, pagesVisited);
   const pageCount = Math.ceil(userData?.length / itemsPerPage);
 
@@ -116,7 +116,6 @@ any) {
 
   useEffect(() => {
     setUserData(sortByReferral(data));
-    console.log(sortByReferral(data));
   }, []);
 
   return userData ? (
