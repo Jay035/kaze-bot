@@ -8,7 +8,7 @@ type Props = {};
 
 export default function InputContainer({}: Props) {
   const [tokenName, setTokenName] = useState<string>("");
-  const [tokenLogo, setTokenLogo] = useState<File | null>();
+  const [tokenLogo, setTokenLogo] = useState<File | undefined>();
   const [tokenSymbol, setTokenSymbol] = useState<string>("");
   const [tokenDescription, setTokenDescription] = useState<string>("");
   const [tokenSupply, setTokenSupply] = useState<string>("");
@@ -18,13 +18,17 @@ export default function InputContainer({}: Props) {
   const inputRef = useRef<any>(null);
   const handleFileSelected = (file: File | undefined) => {
     setTokenLogo?.(file);
-
-    // console.log(file?.clientWidth)
+    console.log(file)
   };
+
+  const removeFile = () => {
+    setTokenLogo?.(undefined)
+  }
 
   const onButtonClick = () => {
     inputRef?.current?.click();
   };
+
   return (
     <form className="text-[#E4E4E7] flex flex-col gap-6">
       {/* LOGO */}
@@ -35,6 +39,7 @@ export default function InputContainer({}: Props) {
         <CustomFileDropbox
           inputRef={inputRef}
           selectedFile={tokenLogo!}
+          removeFile={removeFile}
           onFileSelected={handleFileSelected}
           onButtonClick={onButtonClick}
         />
@@ -131,13 +136,13 @@ export default function InputContainer({}: Props) {
       <div className="flex gap-6 mt-10 md:items-center justify-end">
         <button
           onClick={Redirect}
-          className="text-[#A0A0AB)] tracking-tight w-[7.375rem] text-center rounded-[0.625rem] md:text-2xl"
+          className="text-[#A0A0AB] text-lg leading-10 tracking-tight w-[7.375rem] text-center rounded-[0.625rem] md:text-2xl"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="bg-white disabled:bg-white/50 tracking-tight hover:bg-white/80 w-[14.25rem] text-center rounded-[6.25rem] md:text-2xl p-[0.6rem] text-[#131313]"
+          className="bg-white leading-10] disabled:bg-[#26272B] tracking-tight hover:bg-[#26272B] md:w-[14.25rem] text-center rounded-[6.25rem] text-lg w-48 md:text-2xl p-[0.6rem] text-black disabled:text-[#A0A0AB]"
         >
           Create token
         </button>
