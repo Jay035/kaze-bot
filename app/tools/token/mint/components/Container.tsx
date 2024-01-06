@@ -8,34 +8,33 @@ import { useState } from "react";
 type Props = {};
 
 export default function Container({}: Props) {
-  const { isModalShowing, setIsModalShowing, showModal, toggleModal } =
-    GlobalContext();
+  const { toggleModal } = GlobalContext();
   const [mintAddress, setMintAddress] = useState<string>("");
-  const [burnAmount, setBurnAmount] = useState<number>(0);
+  const [mintAmount, setMintAmount] = useState<number>(0);
   const [addressVerified, setAddressVerified] = useState<boolean>(false);
-  const [burningToken, setBurningToken] = useState(false);
-  const [isBurnSuccessful, setIsBurnSuccessful] = useState(false);
+  const [mintingToken, setMintingToken] = useState(false);
+  const [isMintSuccessful, setIsMintSuccessful] = useState(false);
 
   const verifyAddress = () => {
     setAddressVerified(true);
   };
 
-  const burnToken = () => {
-    setBurningToken(true);
+  const mintToken = () => {
+    setMintingToken(true);
     setTimeout(() => {
-      setIsBurnSuccessful(true);
+      setIsMintSuccessful(true);
     }, 2000);
   };
 
   return (
     <form className="flex flex-col gap-8 mb-28 lg:mb-32">
-      <Modal isBurnSuccessful={isBurnSuccessful}>
-        {!isBurnSuccessful ? (
+      <Modal isMintSuccessful={isMintSuccessful}>
+        {!isMintSuccessful ? (
           <>
-            {burningToken ? (
+            {mintingToken ? (
               <div className="bg-[#18181B] text-center relative text-white w-full rounded-2xl p-6 xl:p-8 pt-[4.75rem] pb-14 md:w-full h-fit max-h-[90vh] overflow-y-auto max-w-[45rem]">
                 <h1 className="tracking-[-0.015rem] font-medium text-xl md:text-2xl">
-                  Burning Tokens in progress...
+                  Minting Tokens in progress...
                 </h1>
                 <div className="bg-[#3F3F46] w-[21rem] mx-auto mt-[0.94rem] p-[0.05rem] rounded-[0.625rem]">
                   <div className="bg-[#26272B] p-4 rounded-[0.625rem] flex gap-[0.88rem]">
@@ -50,7 +49,7 @@ export default function Container({}: Props) {
                     </div>
                     <div className="flex flex-col gap-1 w-full">
                       <h2 className="text-sm text-left font-medium">
-                        Kaze bot burn transaction
+                        Kaze bot mint
                       </h2>
                       {/* progress bar */}
                       <div className="flex gap-3 items-center">
@@ -66,27 +65,29 @@ export default function Container({}: Props) {
                 </div>
               </div>
             ) : (
-              <div className="bg-[#15153c] text-center text-white w-full rounded-2xl p-6 xl:p-8 pt-10 pb-12 md:w-full h-fit max-h-[90vh] overflow-y-auto max-w-[45rem]">
+              <div className="bg-[#18181B] text-center text-white w-full rounded-2xl p-6 xl:p-8 pt-10 pb-12 md:w-full h-fit max-h-[90vh] overflow-y-auto max-w-[45rem]">
                 <h1 className="tracking-[-0.015rem] font-medium text-xl md:text-2xl">
-                  Burn Tokens
+                  Mint Tokens
                 </h1>
 
                 <i
                   onClick={() => {
-                    setIsModalShowing?.(false);
+                    toggleModal?.()
+                    // setIsModalShowing?.(false);
                     document.body.style.overflow = "unset";
                   }}
                   className="ri-close-line text-white absolute top-[1.56rem] right-[2.75rem] cursor-pointer text-2xl md:text-3xl font-medium"
                 ></i>
                 <p className="pt-[1.5rem]">
-                  Are you sure you want to burn these tokens. This action is
+                  Are you sure you want to mint new tokens. This action is
                   permanent and cannot be reversed
                 </p>
                 <div className="flex gap-6 mt-10 md:items-center justify-center">
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      setIsModalShowing?.(true);
+                      toggleModal?.()
+                      // setIsModalShowing?.(true);
                       window.scrollTo({
                         top: 0,
                         behavior: "smooth",
@@ -99,7 +100,7 @@ export default function Container({}: Props) {
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      burnToken();
+                      mintToken();
                       // setIsModalShowing?.(true);
                       // window.scrollTo({
                       //   top: 0,
@@ -109,7 +110,7 @@ export default function Container({}: Props) {
                     type="submit"
                     className={`bg-[#69FF77] leading-10 font-medium text-lg disabled:bg-[#69FF77]/80 tracking-[-0.0225rem] hover:bg-[#69FF77]/80 w-40 text-center rounded-[6.25rem] p-[0.6rem] text-black`}
                   >
-                    Proceed to burn
+                    Proceed to mint
                   </button>
                 </div>
               </div>
@@ -125,7 +126,7 @@ export default function Container({}: Props) {
               alt="check mark"
             />
             <h1 className="tracking-[-0.015rem] mb-[1.2rem] mt-[0.3rem] font-medium text-xl md:text-2xl">
-              Token burn successful
+              Token mint successful
             </h1>
             <div className="bg-[#3F3F46] w-[21rem] mx-auto mt-[0.94rem] p-[0.05rem] rounded-[0.625rem]">
               <div className="bg-[#26272B] p-4 rounded-[0.625rem] flex gap-[0.88rem]">
@@ -227,30 +228,26 @@ export default function Container({}: Props) {
             </div>
           </div>
           {/* Burn Amount */}
-          <div className="flex flex-col gap-[0.62rem]">
-            <CustomInput
-              id="burnAmount"
-              className="flex flex-col gap-[0.62rem]"
-              inputClassName="bg-[#26272B] rounded-[0.625rem] py-[0.875rem] px-[1.1875rem] tracking-[-0.00875rem] text-[0.875rem] text-[#A0A0AB]"
-              label="Burn Amount"
-              type="number"
-              placeholder="0"
-              value={burnAmount}
-              onChange={(e) => {
-                setBurnAmount?.(e.target.value);
-              }}
-              isRequired={false}
-            />
-            <span className="text-xs font-medium text-[#FEF1A7] md:text-sm">
-              Balance: 1000000000
-            </span>
-          </div>
+          <CustomInput
+            id="burnAmount"
+            className="flex flex-col gap-[0.62rem]"
+            inputClassName="bg-[#26272B] rounded-[0.625rem] py-[0.875rem] px-[1.1875rem] tracking-[-0.00875rem] text-[0.875rem] text-[#A0A0AB]"
+            label="Mint Amount"
+            type="number"
+            placeholder="0"
+            value={mintAmount}
+            onChange={(e) => {
+              setMintAmount?.(e.target.value);
+            }}
+            isRequired={false}
+          />
+
           <div className="flex gap-2 mt-10 md:items-center justify-end">
             <button className="text-[#A0A0AB] text-lg leading-10 tracking-tight w-[7.375rem] text-center rounded-[0.625rem] md:text-2xl">
               Cancel
             </button>
             <button
-              disabled={burnAmount === 0 || !burnAmount}
+              disabled={mintAmount === 0 || !mintAmount}
               onClick={(e: any) => {
                 e.preventDefault();
                 window.scrollTo(0, 0);
@@ -263,7 +260,7 @@ export default function Container({}: Props) {
               type="submit"
               className={`bg-white leading-10 text-lg disabled:bg-[#26272B] tracking-tight hover:bg-white/70 w-48 md:w-[14.25rem] text-center rounded-[6.25rem] md:text-2xl p-[0.6rem] text-black disabled:text-[#A0A0AB]`}
             >
-              Burn token
+              Mint tokens
             </button>
           </div>
         </div>

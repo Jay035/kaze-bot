@@ -8,7 +8,8 @@ import {
 } from "react";
 
 export const LaunchpadContext = createContext<GlobalProps>({
-  isModalShowing: false
+  isModalShowing: false,
+  showModal: false,
 });
 
 type Props = {
@@ -17,10 +18,23 @@ type Props = {
 
 export function LaunchpadContextProvider({ children }: Props) {
   const [isModalShowing, setIsModalShowing] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  function toggleModal() {
+    setShowModal((prevState) => !prevState);
+  }
+
+  const onButtonClick = (ref: any) => {
+    ref?.current?.click();
+  };
 
   const value = {
+    onButtonClick,
     isModalShowing,
     setIsModalShowing,
+    showModal,
+    setShowModal,
+    toggleModal,
   };
   return (
     <LaunchpadContext.Provider value={value}>

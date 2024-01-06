@@ -1,3 +1,4 @@
+import RedirectButton from "@/components/RedirectButton";
 import Container from "./components/Container";
 
 type Props = {};
@@ -10,12 +11,7 @@ export default function ManageToken({}: Props) {
           Manage token
         </h1>
 
-        <div className="">
-          <i
-            // onClick={Redirect}
-            className="ri-close-line text-white cursor-pointer text-2xl md:text-3xl font-medium"
-          ></i>
-        </div>
+        <RedirectButton className="text-white cursor-pointer text-2xl md:text-3xl font-medium" />
       </section>
       <Container />
     </main>

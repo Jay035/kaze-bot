@@ -1,6 +1,5 @@
-import React from "react";
 import InputContainer from "./components/InputContainer";
-import Redirect from "@/components/RedirectButton";
+import RedirectButton from "@/components/RedirectButton";
 
 type Props = {};
 
@@ -16,12 +15,7 @@ export default function CreateToken({}: Props) {
             <span className="text-[#F04438]">(*) </span>is required field
           </p>
         </div>
-        <div className="">
-          <i
-            onClick={Redirect}
-            className="ri-close-line text-white cursor-pointer text-2xl md:text-3xl font-medium"
-          ></i>
-        </div>
+        <RedirectButton className="text-white cursor-pointer text-2xl md:text-3xl font-medium" />
       </section>
       <InputContainer />
     </main>

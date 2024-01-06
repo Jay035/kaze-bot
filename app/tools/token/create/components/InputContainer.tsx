@@ -2,13 +2,15 @@
 import CustomFileDropbox from "@/components/CustomFileDropbox";
 import CustomInput from "@/components/CustomInput";
 import Redirect from "@/components/RedirectButton";
+import { GlobalContext } from "@/context/Context";
 import { useRef, useState } from "react";
 
 type Props = {};
 
 export default function InputContainer({}: Props) {
+  const {onButtonClick} = GlobalContext();
   const [tokenName, setTokenName] = useState<string>("");
-  const [tokenLogo, setTokenLogo] = useState<File | undefined>();
+  const [tokenLogo, setTokenLogo] = useState<File | null>();
   const [tokenSymbol, setTokenSymbol] = useState<string>("");
   const [tokenDescription, setTokenDescription] = useState<string>("");
   const [tokenSupply, setTokenSupply] = useState<string>("");
@@ -16,41 +18,40 @@ export default function InputContainer({}: Props) {
   const [error, setError] = useState<string>("");
 
   const inputRef = useRef<any>(null);
-  const handleFileSelected = (file: File | undefined) => {
+  const handleFileSelected = (file: File | null) => {
     setTokenLogo?.(file);
-    console.log(file)
+    console.log(file);
   };
 
   const removeFile = () => {
-    setTokenLogo?.(undefined)
-  }
-
-  const onButtonClick = () => {
-    inputRef?.current?.click();
+    setTokenLogo?.(null);
   };
+
+  
 
   return (
     <form className="text-[#E4E4E7] flex flex-col gap-6">
       {/* LOGO */}
-      <div className=" tracking-[-0.01rem] flex flex-col gap-[0.62rem]">
+      <div className="tracking-[-0.01rem] flex flex-col gap-[0.62rem]">
         <p>
           Logo (attach document)<span className="text-[#F04438]">*</span>
         </p>
         <CustomFileDropbox
+          fileType="image/*"
           inputRef={inputRef}
           selectedFile={tokenLogo!}
           removeFile={removeFile}
           onFileSelected={handleFileSelected}
-          onButtonClick={onButtonClick}
+          // onButtonClick={onButtonClick}
         />
-        {tokenLogo && (
+        {/* {tokenLogo && (
           <button
             className="text-[#69FF77] cursor-pointer w-fit "
             onClick={onButtonClick}
           >
             Change file
           </button>
-        )}
+        )} */}
         <p className="text-xs tracking-[-0.0075rem] text-[#D1D1D6]">
           SVG, PNG, JPG or GIF (max. 400x400px)
         </p>

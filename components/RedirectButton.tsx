@@ -2,10 +2,15 @@
 import { useRouter } from "next/navigation";
 
 type Props = {
-  route: string;
+  className: string;
 };
 
-export default function Redirect({}) {
+export default function RedirectButton({ className }: Props) {
   const router = useRouter();
-  return router.back();
+  return (
+    <i
+      onClick={() => router.back()}
+      className={`ri-close-line ${className}`}
+    ></i>
+  );
 }

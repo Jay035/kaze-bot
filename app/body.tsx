@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import BurnTokenModal from "@/components/Modal";
 import { GlobalContext } from "@/context/Context";
 import AOS from "aos";
@@ -11,7 +12,7 @@ export default function BodyComponent({
 }: {
   children: React.ReactNode;
 }) {
-  const { isModalShowing } = GlobalContext();
+  // const { isModalShowing } = GlobalContext();
 
   useEffect(() => {
     AOS.init({
@@ -21,7 +22,7 @@ export default function BodyComponent({
   }, []);
   return (
     <div className="font-aspekta bg-[#010101] overflow-x-hidden relative">
-      {isModalShowing === true && <BurnTokenModal />}
+      {/* {isModalShowing === true && <BurnTokenModal />} */}
       {children}
     </div>
   );
