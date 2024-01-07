@@ -10,7 +10,6 @@
 		"postinstall": "prisma generate"
 	},
 	"dependencies": {
-		"@netlify/plugin-nextjs": "^4.41.3",
 		"@prisma/client": "^5.7.1",
 		"@types/react-paginate": "^7.1.4",
 		"aos": "^2.3.4",
@@ -21,6 +20,7 @@
 		"swr": "^2.2.4"
 	},
 	"devDependencies": {
+		"@netlify/plugin-nextjs": "^4.29.5-appdir.0",
 		"@types/aos": "^3.0.7",
 		"@types/node": "^20",
 		"@types/react": "^18",
