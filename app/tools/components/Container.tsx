@@ -55,11 +55,11 @@ export default function Container({}: Props) {
             }}
             className="w-full cursor-pointer py-6 md:pt-[1.94rem] md:pb-[2.7rem] bg-[#212124] px-3 md:px-[2.19rem] flex items-center gap-4 rounded-3xl"
           >
-            <div className="bg-[#FEF1A7] flex justify-center items-center p-5 rounded-full">
+            <div className="bg-[#FEF1A7] flex justify-center items-center p-3 md:p-5 rounded-full">
               <Image
                 width="0"
                 height="0"
-                className="w-full h-full"
+                className={`w-full h-full ${tool.text !== "Token Airdrop" && 'w-[25px] md:w-full'}`}
                 src={tool?.icon}
                 alt="plus icon"
               />

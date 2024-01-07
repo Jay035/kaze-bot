@@ -126,7 +126,7 @@ any) {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 mb-24 overflow-x-auto h-full max-h-96 md:max-h-[30rem] w-full text-left">
+          <div className="grid grid-cols-1 mb-16 overflow-x-auto h-full max-h-96 md:max-h-[30rem] w-full text-left">
             <table className=" bg-[#111]">
               <thead className="bg-[#26272B]">
                 <tr className="font-aspekta-medium">
@@ -180,7 +180,7 @@ any) {
                   </th>
                 </tr>
               </thead>
-              <tbody className="mt-[1.19rem] text-sm w-full h-full max-h-56">
+              <tbody className="mt-[1.19rem] text-sm w-full">
                 {userData?.length > 0 ? (
                   userData?.map((d: any, index: any) => (
                     <tr key={index} className="">

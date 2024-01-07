@@ -8,7 +8,7 @@ type Props = {};
 export default function ToolsPage({}: Props) {
   const router = useRouter();
   return (
-    <main className="min-h-screen px-8 md:px-10 xl:px-28 mt-28 lg:mt-32">
+    <main className="min-h-screen px-8 md:px-10 xl:px-28 my-28 md:my-32">
       <div className="text-white flex items-center gap-4">
         <Image
           onClick={() => {

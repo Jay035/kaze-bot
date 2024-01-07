@@ -7,6 +7,11 @@ type Props = {};
 
 export default function Navbar({}: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
+  if(menuOpen) {
+    document.body.style.overflow = "hidden";
+  }else{
+    document.body.style.overflow = "unset";
+  }
 
   return (
     <nav
@@ -27,27 +32,27 @@ export default function Navbar({}: Props) {
         </Link>
       </section>
       <section
-        className={` bg-[#1e1e1e] font-normal md:relative absolute w-full h-screen z-[9999999] md:bg-transparent md:w-fit md:h-fit flex flex-col md:flex-row gap-5 justify-center items-center transition-all ${
+        className={` bg-[#1e1e1e] font-normal md:relative px-4 absolute w-full h-screen z-[9999999] md:gap-5 md:bg-transparent md:w-fit md:h-fit flex flex-col md:flex-row justify-center items-center transition-all ${
           menuOpen ? "left-0 top-0" : "-left-full md:left-0"
         }`}
       >
         <Link
           href="/tools"
           onClick={() => setMenuOpen((prevState) => !prevState)}
-          className="flex items-center justify-center hover:text-[#69FF77] hover:font-bold text-lg sm:text-xl lg:text-2xl tracking-[-0.03rem] text-center text-white "
+          className="flex items-center justify-center w-full py-4 border-y border-white/25 md:border-none hover:text-[#69FF77] hover:font-bold text-lg sm:text-xl lg:text-2xl tracking-[-0.03rem] text-center text-white "
         >
           Tools
         </Link>
         <Link
           href="/leaderboard"
           onClick={() => setMenuOpen((prevState) => !prevState)}
-          className="flex items-center justify-center hover:text-[#69FF77] hover:font-bold text-lg sm:text-xl lg:text-2xl tracking-[-0.03rem] text-center text-white"
+          className="flex items-center justify-center  w-full py-4 border-b border-white/25 md:border-none hover:text-[#69FF77] hover:font-bold text-lg sm:text-xl lg:text-2xl tracking-[-0.03rem] text-center text-white"
         >
           Leaderboard
         </Link>
         <a
           href="https://kazebotinj.gitbook.io/kaze-bot-documentation/"
-          className="flex items-center justify-center hover:text-[#69FF77] hover:font-bold text-lg sm:text-xl lg:text-2xl tracking-[-0.03rem] text-center text-white "
+          className="flex items-center justify-center w-full py-4 border-b border-white/25 md:border-none hover:text-[#69FF77] hover:font-bold text-lg sm:text-xl lg:text-2xl tracking-[-0.03rem] text-center text-white "
         >
           Documentation
         </a>

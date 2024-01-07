@@ -5,7 +5,7 @@ type Props = {};
 
 export default function CreateToken({}: Props) {
   return (
-    <main className="min-h-screen text-[#E4E4E7)] px-8 md:px-10 xl:px-28 my-28 lg:my-32">
+    <main className="min-h-screen text-[#E4E4E7)] px-8 md:px-10 xl:px-28 my-28 md:my-32">
       <section className="flex items-start justify-between gap-4">
         <div className="mb-8">
           <h1 className="tracking-tight mb-[0.8rem] text-[#F4F4F5] text-2xl lg:text-[2rem] lg:leading-[1.125rem]">
