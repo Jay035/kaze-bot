@@ -126,7 +126,7 @@ any) {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 mb-16 overflow-x-auto h-full max-h-96 md:max-h-[30rem] w-full text-left">
+          <div className="grid grid-cols-1 mb-16 overflow-x-auto h-full max-h-[90vh] md:max-h-[95vh] w-full text-left">
             <table className=" bg-[#111]">
               <thead className="bg-[#26272B]">
                 <tr className="font-aspekta-medium">
