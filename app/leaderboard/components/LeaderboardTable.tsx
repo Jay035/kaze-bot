@@ -180,7 +180,7 @@ any) {
                   </th>
                 </tr>
               </thead>
-              <tbody className="mt-[1.19rem] text-sm w-full h-full max-h-56">
+              <tbody className="mt-[1.19rem] text-sm w-full">
                 {userData?.length > 0 ? (
                   userData?.map((d: any, index: any) => (
                     <tr key={index} className="">
