@@ -4,8 +4,8 @@
 
 /* ------------------------------------------------------------- */
 
-.active{
-  @apply text-[#69FF77] font-bold
+.active {
+  @apply text-[#69FF77] font-bold;
 }
 
 .video-container {
@@ -74,26 +74,23 @@ td {
   @apply py-[1.31rem] px-3 md:px-5 w-fit;
 }
 
-
 /* LEADERBOARD TABLE SCROLLBAR */
 /* width */
 #leaderboard ::-webkit-scrollbar {
-  width: 10px;
+  @apply w-3;
 }
 
 /* Track */
 #leaderboard ::-webkit-scrollbar-track {
-  background: #585656;
+  @apply bg-[#585656];
 }
 
-/* Handle */
 #leaderboard ::-webkit-scrollbar-thumb {
-  background: #1d1c20;
+  @apply cursor-pointer bg-[#1d1c20];
 }
 
-/* Handle on hover */
 #leaderboard ::-webkit-scrollbar-thumb:hover {
-  background: #26272b;
+  @apply bg-[#26272b];
 }
 
 .table-loader {
