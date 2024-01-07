@@ -53,7 +53,7 @@ export default function Navbar({}: Props) {
         </a>
         <Link
           href="/wallet"
-		  onClick={() => setMenuOpen((prevState) => !prevState)}
+          onClick={() => setMenuOpen((prevState) => !prevState)}
           className="bg-white md:hidden text-center mt-10 text-lg w-48 hover:border hover:border-white hover:bg-transparent hover:text-white sm:text-xl lg:text-2xl text-[#131313] rounded-[6.25rem] p-[0.6rem]"
         >
           Connect wallet
@@ -61,7 +61,7 @@ export default function Navbar({}: Props) {
       </section>
       <Link
         href="/wallet"
-		onClick={() => setMenuOpen((prevState) => !prevState)}
+        onClick={() => setMenuOpen((prevState) => !prevState)}
         className="bg-white hidden text-center md:block text-lg w-48 hover:border hover:border-white hover:bg-transparent hover:text-white sm:text-xl lg:text-2xl text-[#131313] rounded-[6.25rem] p-[0.6rem]"
       >
         Connect wallet
