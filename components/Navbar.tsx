@@ -1,17 +1,20 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {};
 
 export default function Navbar({}: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
-  if(menuOpen) {
-    document.body.style.overflow = "hidden";
-  }else{
-    document.body.style.overflow = "unset";
-  }
+  useEffect(() => {
+    if(menuOpen) {
+      document.body.style.overflow = "hidden";
+    }else{
+      document.body.style.overflow = "unset";
+    }
+
+  }, [menuOpen])
 
   return (
     <nav
