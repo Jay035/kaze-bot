@@ -126,19 +126,17 @@ any) {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 mb-24 overflow-x-auto w-full text-left">
+          <div className="grid grid-cols-1 mb-24 overflow-x-auto h-full max-h-96 md:max-h-[30rem] w-full text-left">
             <table className=" bg-[#111]">
               <thead className="bg-[#26272B]">
                 <tr className="font-aspekta-medium">
                   <th
-                    data-aos="fade-in"
                     className="text-[#D0D5DD] text-xs lg:text-[1.19rem]"
                     //   id="telegram-username"
                   >
                     TELEGRAM USERNAME
                   </th>
                   <th
-                    data-aos="fade-in"
                     className="text-[#D0D5DD] text-xs lg:text-[1.19rem] cursor-pointer"
                     id="referrals"
                     onClick={toggleReferral}
@@ -153,7 +151,6 @@ any) {
                     ></i>
                   </th>
                   <th
-                    data-aos="fade-in"
                     className="text-[#D0D5DD] lg:whitespace-nowrap text-xs lg:text-[1.19rem] cursor-pointer"
                     id="royalty-points"
                     onClick={toggleRoyaltyPoints}
@@ -168,7 +165,6 @@ any) {
                     ></i>
                   </th>
                   <th
-                    data-aos="fade-in"
                     className="text-[#D0D5DD] lg:whitespace-nowrap text-xs lg:text-[1.19rem] cursor-pointer"
                     id="contest-points"
                     onClick={toggleContestPoints}
@@ -184,14 +180,11 @@ any) {
                   </th>
                 </tr>
               </thead>
-              <tbody className="mt-[1.19rem] text-sm w-full">
+              <tbody className="mt-[1.19rem] text-sm w-full h-full max-h-56">
                 {userData?.length > 0 ? (
-                  currentItems?.map((d: any, index: any) => (
+                  userData?.map((d: any, index: any) => (
                     <tr key={index} className="">
-                      <th
-                        data-aos="fade-in"
-                        className="md:text-xl xl:text-2xl font-aspekta-light-250 w-fit flex items-center gap-2 md:gap-8"
-                      >
+                      <th className="md:text-xl xl:text-2xl font-aspekta-light-250 w-fit flex items-center gap-2 md:gap-8">
                         <span className="text-[#FEF1A7] font-aspekta-bold-800">
                           {index + 1}.
                         </span>
@@ -232,22 +225,13 @@ any) {
                           {d?.userName}
                         </span>
                       </th>
-                      <td
-                        className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
-                        data-aos="fade-in"
-                      >
+                      <td className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl">
                         {d?.referralCount}
                       </td>
-                      <td
-                        className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
-                        data-aos="fade-in"
-                      >
+                      <td className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl">
                         {d?.points}
                       </td>
-                      <td
-                        className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl"
-                        data-aos="fade-in"
-                      >
+                      <td className="text-[#98A2B3] font-aspekta-light-250 md:text-xl xl:text-2xl">
                         {d.contestP}
                       </td>
                     </tr>
@@ -270,7 +254,7 @@ any) {
               hasPrevPage={start > 0}
             /> */}
 
-            <ReactPaginate
+            {/* <ReactPaginate
               breakLabel="..."
               nextLabel=">"
               onPageChange={handlePaginationButtonClick}
@@ -283,7 +267,7 @@ any) {
               nextLinkClassName={"nextBtn"}
               disabledClassName={"paginationDisabled"}
               activeClassName={"paginationActive"}
-            />
+            /> */}
           </div>
         </>
       )}

@@ -74,7 +74,7 @@ td {
 /* LEADERBOARD TABLE SCROLLBAR */
 /* width */
 #leaderboard ::-webkit-scrollbar {
-  width: 10px;
+  width: 15px;
 }
 
 /* Track */
