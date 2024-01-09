@@ -11,7 +11,7 @@ export default function Footer({}: Props) {
           TELEGRAM
         </a>
         <a
-          href="https://twitter.com/Kazebot_INJ"
+          href="https://twitter.com/Kazebot_"
           className="py-6 lg:py-[2.16rem] md:border-x md:px-[2.62rem]"
         >
           TWITTER
