@@ -7,14 +7,14 @@ type Props = {};
 
 export default function Navbar({}: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
-  useEffect(() => {
-    if(menuOpen) {
-      document.body.style.overflow = "hidden";
-    }else{
-      document.body.style.overflow = "unset";
-    }
-
-  }, [menuOpen])
+  // useEffect(() => {
+  //   if ( menuOpen && window.screen.width <= 768) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "unset";
+  //   }
+  //   console.log(window.screen.width);
+  // }, [window.screen.width]);
 
   return (
     <nav

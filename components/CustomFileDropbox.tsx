@@ -1,11 +1,14 @@
 import { GlobalContext } from "@/context/Context";
+import GetFileSize from "@/hooks/getFileSize";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 interface CustomFileDropboxProps {
   selectedFile: File | null;
   inputRef: any;
   fileType: string;
+  // imageDimensionSupported: boolean;
   onFileSelected: (files: File | null) => void;
   onButtonClick?: () => void;
   removeFile: (files: any) => void;
@@ -16,23 +19,79 @@ const CustomFileDropbox: React.FC<CustomFileDropboxProps> = ({
   selectedFile,
   inputRef,
   removeFile,
+  // imageDimensionSupported,
   // onButtonClick,
   fileType,
 }) => {
   const { onButtonClick } = GlobalContext();
+  const pathname = usePathname();
   const fileSize: number | null = selectedFile && selectedFile?.size / 10000;
   const [isDragOver, setIsDragOver] = useState(false);
+  const [imageDimensionSupported, setImageDimensionSupported] = useState(false);
+
+  const checkFileSize = (file: File | null) => {
+    if (file) {
+      const img = document.createElement("img");
+
+      // const selectedImage = file;
+
+      const objectURL = URL.createObjectURL(file);
+
+      img.onload = function handleLoad() {
+        console.log(`Width: ${img.width}, Height: ${img.height}`);
+
+        if (img.width > 400 || img.height > 400) {
+          alert("The image's width or height is more than 400px");
+          setImageDimensionSupported(false);
+        }
+        setImageDimensionSupported(true);
+        URL.revokeObjectURL(objectURL);
+      };
+      img.src = objectURL;
+    }
+  };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsDragOver(false);
 
     const file = event.dataTransfer.files[0];
-    if (file.type === "text/csv" || file.type === "application/vnd.ms-excel") {
-      console.log("csv file has been selected");
-      onFileSelected(file);
+    if (pathname === "/tools/token/airdrop") {
+      if (
+        file.type === "text/csv" ||
+        file.type === "application/vnd.ms-excel"
+      ) {
+        console.log("csv file has been selected");
+        onFileSelected(file);
+      } else {
+        alert("Please drop a CSV file.");
+      }
     } else {
-      alert("Please drop a CSV file.");
+      checkFileSize(file);
+      if (imageDimensionSupported) {
+        onFileSelected(file);
+      }
+      // if (file) {
+      //   const img = document.createElement("img");
+
+      //   const selectedImage = file;
+
+      //   const objectURL = URL.createObjectURL(selectedImage);
+
+      //   img.onload = function handleLoad() {
+      //     console.log(`Width: ${img.width}, Height: ${img.height}`);
+
+      //     if (img.width < 100 || img.height < 100) {
+      //       console.log("The image's width or height is less than 100px");
+      //     }
+
+      //     URL.revokeObjectURL(objectURL);
+      //   };
+
+      //   img.src = objectURL;
+
+      //   // document.body.appendChild(img);
+      // }
     }
   };
 
@@ -51,8 +110,10 @@ const CustomFileDropbox: React.FC<CustomFileDropboxProps> = ({
   ) => {
     event.preventDefault();
     if (event.target.files && event?.target?.files.length > 0) {
-      onFileSelected(event.target.files[0]);
-      console.log(event.target.files[0]?.size / 1000000);
+      checkFileSize(event.target.files[0]);
+      if (imageDimensionSupported) {
+        onFileSelected(event.target.files[0]);
+      }
     }
   };
 

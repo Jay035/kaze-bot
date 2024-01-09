@@ -1,14 +1,14 @@
 "use client";
 import CustomFileDropbox from "@/components/CustomFileDropbox";
 import CustomInput from "@/components/CustomInput";
-import Redirect from "@/components/RedirectButton";
 import { GlobalContext } from "@/context/Context";
-import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {};
 
 export default function InputContainer({}: Props) {
-  const {onButtonClick} = GlobalContext();
+  // const { onButtonClick } = GlobalContext();
   const [tokenName, setTokenName] = useState<string>("");
   const [tokenLogo, setTokenLogo] = useState<File | null>();
   const [tokenSymbol, setTokenSymbol] = useState<string>("");
@@ -16,11 +16,16 @@ export default function InputContainer({}: Props) {
   const [tokenSupply, setTokenSupply] = useState<string>("");
   const [tokenDecimals, setTokenDecimals] = useState<string>("");
   const [error, setError] = useState<string>("");
+  // const [imageDimensionSupported, setImageDimensionSupported] = useState(false);
+
+  const router = useRouter();
 
   const inputRef = useRef<any>(null);
   const handleFileSelected = (file: File | null) => {
     setTokenLogo?.(file);
+    // checkFileSize();
     console.log(file);
+    
   };
 
   const removeFile = () => {
@@ -28,6 +33,10 @@ export default function InputContainer({}: Props) {
   };
 
   
+
+  // useEffect(() => {
+  //   checkFileSize();
+  // }, [tokenLogo]);
 
   return (
     <form className="text-[#E4E4E7] flex flex-col gap-6">
@@ -42,6 +51,7 @@ export default function InputContainer({}: Props) {
           selectedFile={tokenLogo!}
           removeFile={removeFile}
           onFileSelected={handleFileSelected}
+          // imageDimensionSupported={imageDimensionSupported}
           // onButtonClick={onButtonClick}
         />
         {/* {tokenLogo && (
@@ -136,7 +146,7 @@ export default function InputContainer({}: Props) {
 
       <div className="flex gap-6 mt-10 md:items-center justify-end">
         <button
-          onClick={Redirect}
+          onClick={() => router.back()}
           className="text-[#A0A0AB] text-lg leading-10 tracking-tight w-[7.375rem] text-center rounded-[0.625rem] md:text-2xl"
         >
           Cancel
