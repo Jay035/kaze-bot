@@ -12,6 +12,7 @@ export default function Container({}: Props) {
     GlobalContext();
   const [mintAddress, setMintAddress] = useState<string>("");
   const [burnAmount, setBurnAmount] = useState<number>(0);
+  const [burnProgress, setBurnProgress] = useState(10);
   const [addressVerified, setAddressVerified] = useState<boolean>(false);
   const [burningToken, setBurningToken] = useState(false);
   const [isBurnSuccessful, setIsBurnSuccessful] = useState(false);
@@ -23,8 +24,17 @@ export default function Container({}: Props) {
   const burnToken = () => {
     setBurningToken(true);
     setTimeout(() => {
-      setIsBurnSuccessful(true);
+      setBurnProgress(40);
+    }, 1000);
+    setTimeout(() => {
+      setBurnProgress(80);
     }, 2000);
+    setTimeout(() => {
+      setBurnProgress(100);
+    }, 3000);
+    setTimeout(() => {
+      setIsBurnSuccessful(true);
+    }, 4000);
   };
 
   return (
@@ -55,10 +65,12 @@ export default function Container({}: Props) {
                       {/* progress bar */}
                       <div className="flex gap-3 items-center">
                         <div className="bg-[#EAECF0] w-full h-2 rounded-xl">
-                          <div className="bg-[#69FF77] w-[80%] rounded-xl h-full"></div>
+                          <div
+                            className={`bg-[#69FF77] w-[${burnProgress}%] rounded-xl h-full`}
+                          ></div>
                         </div>
                         <p className="text-sm font-medium text-[#EAECF0]">
-                          80%
+                          {burnProgress}%
                         </p>
                       </div>
                     </div>
@@ -66,7 +78,7 @@ export default function Container({}: Props) {
                 </div>
               </div>
             ) : (
-              <div className="bg-[#15153c] text-center text-white w-full rounded-2xl p-6 xl:p-8 pt-10 pb-12 md:w-full h-fit max-h-[90vh] overflow-y-auto max-w-[45rem]">
+              <div className="bg-[#18181B] text-center text-white w-full rounded-2xl p-6 xl:p-8 pt-10 pb-12 md:w-full h-fit max-h-[90vh] overflow-y-auto max-w-[45rem]">
                 <h1 className="tracking-[-0.015rem] font-medium text-xl md:text-2xl">
                   Burn Tokens
                 </h1>

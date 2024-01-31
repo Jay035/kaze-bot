@@ -23,13 +23,15 @@ const CustomFileDropbox: React.FC<CustomFileDropboxProps> = ({
   // onButtonClick,
   fileType,
 }) => {
-  const { onButtonClick } = GlobalContext();
+  const { onButtonClick, fileSRC, setFileSRC } = GlobalContext();
   const pathname = usePathname();
   const fileSize: number | null = selectedFile && selectedFile?.size / 10000;
   const [isDragOver, setIsDragOver] = useState(false);
   const [imageDimensionSupported, setImageDimensionSupported] = useState(false);
 
   const checkFileSize = (file: File | null) => {
+    const previewImage = document.getElementById("preview-image");
+
     if (file) {
       const img = document.createElement("img");
 
@@ -48,6 +50,19 @@ const CustomFileDropbox: React.FC<CustomFileDropboxProps> = ({
         URL.revokeObjectURL(objectURL);
       };
       img.src = objectURL;
+      console.log(img.src);
+      const fileReader = new FileReader();
+      console.log(fileReader);
+      // fileReader.onload = function handleLoad() {
+      //   previewImage?.setAttribute('src', img.src);
+      //   //  = fileReader.result;
+
+      //   previewImage!.classList.remove("hidden") = 'block';
+      // };
+
+      // if (selectedFile) {
+      //   container?.appendChild(img);
+      // }
     }
   };
 
@@ -70,6 +85,7 @@ const CustomFileDropbox: React.FC<CustomFileDropboxProps> = ({
       checkFileSize(file);
       if (imageDimensionSupported) {
         onFileSelected(file);
+        console.log(imageDimensionSupported);
       }
       // if (file) {
       //   const img = document.createElement("img");
@@ -113,6 +129,7 @@ const CustomFileDropbox: React.FC<CustomFileDropboxProps> = ({
       checkFileSize(event.target.files[0]);
       if (imageDimensionSupported) {
         onFileSelected(event.target.files[0]);
+        console.log(imageDimensionSupported);
       }
     }
   };

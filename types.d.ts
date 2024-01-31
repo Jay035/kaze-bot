@@ -9,7 +9,8 @@ interface GlobalProps{
 	setIsModalShowing?: (x: boolean) => void;
 	toggleModal?: () => void;
 	onButtonClick?: (x: any) => void;
-    
+    fileSRC?: string;
+    setFileSRC?: (x: string) => void
 }
 
 interface ModalProps {
