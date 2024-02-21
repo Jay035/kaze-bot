@@ -45,8 +45,9 @@ const CustomFileDropbox: React.FC<CustomFileDropboxProps> = ({
         if (img.width > 400 || img.height > 400) {
           alert("The image's width or height is more than 400px");
           setImageDimensionSupported(false);
+        } else {
+          setImageDimensionSupported(true);
         }
-        setImageDimensionSupported(true);
         URL.revokeObjectURL(objectURL);
       };
       img.src = objectURL;

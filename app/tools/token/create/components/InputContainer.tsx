@@ -48,18 +48,17 @@ export default function InputContainer({}: Props) {
           // imageDimensionSupported={imageDimensionSupported}
           // onButtonClick={onButtonClick}
         />
-        {/* {tokenLogo && ( */}
-        {/* <Image
-          id="preview-image"
-          width="0"
-          height="0"
-          className="w-20 md:w-28 h-20 md:h-28"
-          src="#"
-          alt="file preview"
-        /> */}
-        <img id="preview-image" src="#" alt="example image" />
-
-        {/* // )} */}
+        {tokenLogo && (
+          // <Image
+          //   id="preview-image"
+          //   width="0"
+          //   height="0"
+          //   className="w-20 md:w-28 h-20 md:h-28"
+          //   src="#"
+          //   alt="file preview"
+          // />
+          <img id="preview-image" src="#" alt="example image" />
+        )}
         <p className="text-xs tracking-[-0.0075rem] text-[#D1D1D6]">
           SVG, PNG, JPG or GIF (max. 400x400px)
         </p>
@@ -151,7 +150,7 @@ export default function InputContainer({}: Props) {
         </button>
         <button
           type="submit"
-          className="bg-white leading-10] disabled:bg-[#26272B] tracking-tight hover:bg-[#26272B] md:w-[14.25rem] text-center rounded-[6.25rem] text-lg w-48 md:text-2xl p-[0.6rem] text-black disabled:text-[#A0A0AB]"
+          className="bg-white leading-10] disabled:bg-[#26272B] hover:text-white tracking-tight hover:bg-[#26272B] md:w-[14.25rem] text-center rounded-[6.25rem] text-lg w-48 md:text-2xl p-[0.6rem] text-black disabled:text-[#A0A0AB]"
         >
           Create token
         </button>
