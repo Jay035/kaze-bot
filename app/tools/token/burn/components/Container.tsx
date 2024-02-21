@@ -3,11 +3,29 @@ import CustomInput from "@/components/CustomInput";
 import Modal from "@/components/Modal";
 import { GlobalContext } from "@/context/Context";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import useFetchTokenDetails from "@/hooks/useFetchTokenDetails";
+import { denomIsParsable, parseDenom } from "@/sdk/utils";
+import useGetUserBalance from "@/hooks/useGetUserBalance";
+import { formatEther, formatUnits, parseUnits } from "ethers";
+import {
+  BroadcastResult,
+  MsgExecuteContract,
+  WalletConnection,
+  useShuttle,
+  MsgSend,
+} from "@delphi-labs/shuttle-react";
+import { MsgExecuteContractCompat } from "@injectivelabs/sdk-ts";
 
 type Props = {};
 
 export default function Container({}: Props) {
+  const { recentWallet, broadcast } = useShuttle();
+  const [tokenData, setTokenData]: any = useState();
+  const [tokenBalance, setTokenBalance]: any = useState();
+  const { fetchTokenDetails } = useFetchTokenDetails();
+  const { fetchUserSpecificBalance } = useGetUserBalance();
+  const [txHash, setTxHash] = useState("");
   const { isModalShowing, setIsModalShowing, showModal, toggleModal } =
     GlobalContext();
   const [mintAddress, setMintAddress] = useState<string>("");
@@ -16,19 +34,71 @@ export default function Container({}: Props) {
   const [burningToken, setBurningToken] = useState(false);
   const [isBurnSuccessful, setIsBurnSuccessful] = useState(false);
 
-  const verifyAddress = () => {
-    setAddressVerified(true);
+  const verifyAddress = async () => {
+    const parsedDenom = parseDenom(mintAddress);
+    const tokenDetails = await fetchTokenDetails(parsedDenom);
+
+    //console.log({ parsedDenom });
+    if (tokenDetails) {
+      setTokenData(tokenDetails);
+      setAddressVerified(true);
+    } else {
+      console.log("Unable to fetch token Details");
+    }
   };
+
+  function useMarsClaim(wallet: WalletConnection) {
+    function createMsg(amountToSend: number, denom: string) {
+      console.log({ burnAmount });
+      const amount = {
+        amount: (
+          amountToSend *
+          10 ** parseInt(tokenData ? tokenData.decimals : 6)
+        ).toString(),
+        denom: parseDenom(denom),
+      };
+      return [
+        new MsgSend({
+          amount: [amount],
+          toAddress: "inj1qqqqqqqqqqqqqqqqqqqqqqqqqqqqph4dlwyxj4",
+          fromAddress: wallet.account.address,
+        }),
+      ];
+    }
+
+    return { createMsg };
+  }
+
+  const claims = useMarsClaim(recentWallet!);
 
   const burnToken = () => {
     setBurningToken(true);
-    setTimeout(() => {
-      setIsBurnSuccessful(true);
-    }, 2000);
+    broadcast({
+      wallet: recentWallet,
+      messages: claims.createMsg(burnAmount, mintAddress),
+    })
+      .then((result: BroadcastResult) => {
+        setTxHash(result.hash);
+        console.log("Broadcast result", result);
+        setTimeout(() => {
+          setIsBurnSuccessful(false);
+        }, 1000);
+      })
+      .catch((error: any) => {
+        console.error("Broadcast error", error);
+      });
   };
 
+  useEffect(() => {
+    if (tokenData) {
+      fetchUserSpecificBalance(tokenData.denom).then((res) => {
+        setTokenBalance(res);
+      });
+    }
+  }, [tokenData]);
+
   return (
-    <form className="flex flex-col gap-8 mb-28 lg:mb-32">
+    <section className="flex flex-col gap-8 mb-28 lg:mb-32">
       <Modal isBurnSuccessful={isBurnSuccessful}>
         {!isBurnSuccessful ? (
           <>
@@ -100,13 +170,7 @@ export default function Container({}: Props) {
                     onClick={(e) => {
                       e.preventDefault();
                       burnToken();
-                      // setIsModalShowing?.(true);
-                      // window.scrollTo({
-                      //   top: 0,
-                      //   behavior: "smooth",
-                      // });
                     }}
-                    type="submit"
                     className={`bg-[#69FF77] leading-10 font-medium text-lg disabled:bg-[#69FF77]/80 tracking-[-0.0225rem] hover:bg-[#69FF77]/80 w-40 text-center rounded-[6.25rem] p-[0.6rem] text-black`}
                   >
                     Proceed to burn
@@ -143,7 +207,7 @@ export default function Container({}: Props) {
                     TRANSACTION ID
                   </h2>
                   <p className="break-words w-60 text-xs tracking-[-0.015rem]">
-                    6F075867122EF209D2C36F833193AB6C9621749324A09655174FEFDB181E2DA2
+                    {txHash}
                   </p>
                 </div>
               </div>
@@ -160,14 +224,28 @@ export default function Container({}: Props) {
           type="text"
           placeholder="Enter Mint address"
           value={mintAddress}
-          onChange={(e) => {
+          onChange={async (e) => {
             setMintAddress?.(e.target.value);
-            verifyAddress();
+            const IsParsable = denomIsParsable(e.target.value);
+            if (IsParsable) {
+              console.log("lll");
+            } else {
+              console.log("kkk");
+            }
+            const parsedDenom = parseDenom(e.target.value);
+            const tokenDetails = await fetchTokenDetails(parsedDenom);
+
+            //	console.log({ tokenDetails });
+            if (tokenDetails) {
+              setTokenData(tokenDetails);
+              setAddressVerified(true);
+            } else {
+              console.log("Unable to fect token Details");
+            }
           }}
           isRequired={false}
         />
         <button
-          type="submit"
           disabled={mintAddress === ""}
           className="bg-[#69FF77] w-[4.7rem] border-[#51525C] border disabled:bg-[#69FF77]/50 tracking-[-0.00875rem] hover:bg-[#69FF77]/80 text-center rounded-[0.625rem] text-sm font-semibold py-[0.9rem] px-5 text-black"
         >
@@ -187,7 +265,7 @@ export default function Container({}: Props) {
                     Token name
                   </p>
                   <p className="text-sm tracking-[-0.00875rem] text-[#E4E4E7]">
-                    Kaze-bot
+                    {tokenData.name}
                   </p>
                 </section>
                 {/* Token symbol */}
@@ -200,7 +278,7 @@ export default function Container({}: Props) {
                       className="w-5 h-4"
                       width="0"
                       height="0"
-                      src="/logo.svg"
+                      src={tokenData.logo}
                       alt="token logo"
                     />
                   </p>
@@ -211,7 +289,7 @@ export default function Container({}: Props) {
                     Token decimals
                   </p>
                   <p className="text-sm tracking-[-0.00875rem] text-[#E4E4E7]">
-                    4
+                    {tokenData.decimals}
                   </p>
                 </section>
                 {/* Version */}
@@ -238,11 +316,16 @@ export default function Container({}: Props) {
               value={burnAmount}
               onChange={(e) => {
                 setBurnAmount?.(e.target.value);
+                console.log(e.target.value);
               }}
               isRequired={false}
             />
             <span className="text-xs font-medium text-[#FEF1A7] md:text-sm">
-              Balance: 1000000000
+              <>{console.log("all promise is here ", tokenBalance)}</>
+              Balance:{" "}
+              {tokenData.decimals && tokenBalance
+                ? formatUnits(tokenBalance, parseInt(tokenData.decimals))
+                : 0}
             </span>
           </div>
           <div className="flex gap-2 mt-10 md:items-center justify-end">
@@ -260,7 +343,6 @@ export default function Container({}: Props) {
                   document.body.style.overflow = "hidden";
                 }
               }}
-              type="submit"
               className={`bg-white leading-10 text-lg disabled:bg-[#26272B] tracking-tight hover:bg-white/70 w-48 md:w-[14.25rem] text-center rounded-[6.25rem] md:text-2xl p-[0.6rem] text-black disabled:text-[#A0A0AB]`}
             >
               Burn token
@@ -268,6 +350,6 @@ export default function Container({}: Props) {
           </div>
         </div>
       )}
-    </form>
+    </section>
   );
 }

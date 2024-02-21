@@ -1,26 +1,77 @@
 "use client";
 import CustomInput from "@/components/CustomInput";
+import useFetchTokenDetails from "@/hooks/useFetchTokenDetails";
+import { denomIsParsable, parseDenom } from "@/sdk/utils";
+import { InjectiveEIP712SigningClient } from "@delphi-labs/shuttle";
+import {
+  MsgSend,
+  WalletConnection,
+  useShuttle,
+  FakeOfflineSigner,
+  BroadcastResult,
+  TransactionMsg,
+  ProtoMsg,
+  AminoMsg,
+  OfflineDirectSigningClient,
+} from "@delphi-labs/shuttle-react";
+
+import { ChainId } from "@injectivelabs/ts-types";
+import { WalletStrategy, MsgBroadcaster } from "@injectivelabs/wallet-ts";
+import { TxRaw } from "@injectivelabs/sdk-ts";
+import { MsgChangeAdmin } from "@injectivelabs/sdk-ts";
 import Image from "next/image";
 import { useState } from "react";
+import { Network } from "@injectivelabs/networks";
+import { createInjTransactions } from "@/sdk/createTransactions";
+import { sendTransaction, signTransaction } from "@/sdk/SendInjTx";
+const chainId = "injective-1";
 
-type Props = {};
-
-export default function Container({}: Props) {
+export default function Container({}: any) {
+  const { fetchTokenDetails } = useFetchTokenDetails();
+  const { recentWallet, broadcast, sign } = useShuttle();
+  const [tokenData, setTokenData]: any = useState();
   const [mintAddress, setMintAddress] = useState<string>("");
   const [addressVerified, setAddressVerified] = useState<boolean>(false);
   const [authorityRevoked, setAuthorityRevoked] = useState<boolean>(false);
+  const walletStrategy = new WalletStrategy({ chainId: ChainId.Mainnet });
 
-  const revokeAuthority = () => {
-    setAuthorityRevoked(true);
+  function useMarsClaim(wallet: WalletConnection) {
+    function createMsg(denom: string) {
+      return [
+        new MsgChangeAdmin({
+          denom,
+          sender: wallet.account.address.toString(),
+          newAdmin: "inj1qqqqqqqqqqqqqqqqqqqqqqqqqqqqph4dlwyxj4",
+        }),
+      ];
+    }
+    return { createMsg };
+  }
+  const claims = useMarsClaim(recentWallet!);
+  const revokeAuthority = async () => {
+    const tx = claims.createMsg(mintAddress);
+    const createResponse = await createInjTransactions(
+      tx,
+      recentWallet?.account.address!
+    );
+    if (createResponse && recentWallet) {
+      await signTransaction(
+        createResponse?.txRaw,
+        createResponse.accountNumber.accountNumber,
+        recentWallet?.account.address
+      );
+    } else {
+      console.log("Undefined Variaables");
+    }
   };
 
   const verifyAddress = () => {
-    setAddressVerified(true);
+    //	setAddressVerified(true);
   };
 
   return (
     <section className="flex flex-col gap-8">
-      <form className="">
+      <div className="">
         <CustomInput
           id="mintAddress"
           className="flex flex-col gap-[0.62rem]"
@@ -29,20 +80,34 @@ export default function Container({}: Props) {
           type="text"
           placeholder="Enter Mint address"
           value={mintAddress}
-          onChange={(e) => {
+          onChange={async (e) => {
             setMintAddress?.(e.target.value);
-            verifyAddress();
+            const IsParsable = denomIsParsable(e.target.value);
+            if (IsParsable) {
+              console.log("lll");
+            } else {
+              console.log("kkk");
+            }
+            const parsedDenom = parseDenom(e.target.value);
+            const tokenDetails = await fetchTokenDetails(parsedDenom);
+
+            //	console.log({ tokenDetails });
+            if (tokenDetails) {
+              setTokenData(tokenDetails);
+              setAddressVerified(true);
+            } else {
+              console.log("Unable to fetch token Details");
+            }
           }}
           isRequired={false}
         />
         <button
-          type="submit"
           disabled={mintAddress === ""}
           className="bg-[#69FF77] w-[4.7rem] mt-6 border-[#51525C] border disabled:bg-[#69FF77]/50 tracking-[-0.00875rem] hover:bg-[#69FF77]/80 text-center rounded-[0.625rem] text-sm font-semibold py-[0.9rem] px-5 text-black"
         >
           Load
         </button>
-      </form>
+      </div>
       {/* Token information */}
       {addressVerified && (
         <div className="flex flex-col gap-8">
@@ -56,7 +121,7 @@ export default function Container({}: Props) {
                     Token name
                   </p>
                   <p className="text-sm tracking-[-0.00875rem] text-[#E4E4E7]">
-                    Kaze-bot
+                    {tokenData.name}
                   </p>
                 </section>
                 {/* Token symbol */}
@@ -69,7 +134,7 @@ export default function Container({}: Props) {
                       className="w-5 h-4"
                       width="0"
                       height="0"
-                      src="/logo.svg"
+                      src={tokenData?.logo}
                       alt="token logo"
                     />
                   </p>
@@ -80,7 +145,7 @@ export default function Container({}: Props) {
                     Token decimals
                   </p>
                   <p className="text-sm tracking-[-0.00875rem] text-[#E4E4E7]">
-                    4
+                    {tokenData?.decimals}
                   </p>
                 </section>
                 {/* Version */}
@@ -109,7 +174,7 @@ export default function Container({}: Props) {
               <div className="bg-[#26272B] rounded-[0.625rem] py-[0.89rem] px-[1.19rem] flex flex-col gap-[0.62rem]">
                 <button
                   disabled={authorityRevoked}
-                  onClick={revokeAuthority}
+                  onClick={async () => await revokeAuthority()}
                   className="bg-[#FEF1A7] disabled:bg-[#FEF1A7]/50 px-[0.9rem] py-3 lg:py-[1.2rem] rounded-[0.6rem] border border-[#51525C] text-black text-center"
                 >
                   Revoke
@@ -123,7 +188,6 @@ export default function Container({}: Props) {
             </button>
             <button
               disabled={authorityRevoked}
-              type="submit"
               className={`bg-white leading-10 disabled:bg-[#26272B] tracking-tight hover:bg-[#26272B] text-lg w-48 md:w-[14.25rem] text-center rounded-[6.25rem] md:text-2xl p-[0.6rem] text-black disabled:text-[#A0A0AB]`}
             >
               {authorityRevoked ? "Save Changes" : "Create token"}

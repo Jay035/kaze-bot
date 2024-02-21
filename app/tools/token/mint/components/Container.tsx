@@ -2,6 +2,13 @@
 import CustomInput from "@/components/CustomInput";
 import Modal from "@/components/Modal";
 import { GlobalContext } from "@/context/Context";
+import useFetchTokenDetails from "@/hooks/useFetchTokenDetails";
+import { sendTransaction, signTransaction } from "@/sdk/SendInjTx";
+import { createInjTransactions } from "@/sdk/createTransactions";
+import { denomIsParsable, parseDenom } from "@/sdk/utils";
+import { WalletConnection } from "@delphi-labs/shuttle";
+import { useShuttle } from "@delphi-labs/shuttle-react";
+import { MsgChangeAdmin, MsgMint } from "@injectivelabs/sdk-ts";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -9,25 +16,62 @@ type Props = {};
 
 export default function Container({}: Props) {
   const { toggleModal } = GlobalContext();
+  const { fetchTokenDetails } = useFetchTokenDetails();
+  const { recentWallet, broadcast, sign } = useShuttle();
+  const [tokenData, setTokenData]: any = useState();
   const [mintAddress, setMintAddress] = useState<string>("");
-  const [mintAmount, setMintAmount] = useState<number>(0);
   const [addressVerified, setAddressVerified] = useState<boolean>(false);
+  const [mintAmount, setMintAmount] = useState<number>(0);
   const [mintingToken, setMintingToken] = useState(false);
   const [isMintSuccessful, setIsMintSuccessful] = useState(false);
 
   const verifyAddress = () => {
     setAddressVerified(true);
   };
-
-  const mintToken = () => {
+  function useMarsClaim(wallet: WalletConnection) {
+    function createMsg(denom: string, amount: string) {
+      return [
+        new MsgMint({
+          sender: recentWallet?.account.address.toString()!,
+          amount: {
+            denom,
+            amount,
+          },
+        }),
+      ];
+    }
+    return { createMsg };
+  }
+  const claims = useMarsClaim(recentWallet!);
+  const mintToken = async () => {
     setMintingToken(true);
+    const tx = claims.createMsg(parseDenom(mintAddress), mintAmount.toString());
+    const createResponse = await createInjTransactions(
+      tx,
+      recentWallet?.account.address!
+    );
+    if (createResponse && recentWallet) {
+      // const txResPonse = await signTransaction(
+      // 	createResponse?.txRaw,
+      // 	createResponse.accountNumber.accountNumber,
+      // 	recentWallet?.account.address
+      // );
+      // console.log(txResPonse);
+      const txReciept = await sendTransaction(
+        tx,
+        recentWallet?.account.address
+      );
+      console.log({ txReciept });
+    } else {
+      console.log("Undefined Variaables");
+    }
     setTimeout(() => {
       setIsMintSuccessful(true);
     }, 2000);
   };
 
   return (
-    <form className="flex flex-col gap-8 mb-28 lg:mb-32">
+    <div className="flex flex-col gap-8 mb-28 lg:mb-32">
       <Modal isMintSuccessful={isMintSuccessful}>
         {!isMintSuccessful ? (
           <>
@@ -72,7 +116,7 @@ export default function Container({}: Props) {
 
                 <i
                   onClick={() => {
-                    toggleModal?.()
+                    toggleModal?.();
                     // setIsModalShowing?.(false);
                     document.body.style.overflow = "unset";
                   }}
@@ -85,8 +129,8 @@ export default function Container({}: Props) {
                 <div className="flex gap-6 mt-10 md:items-center justify-center">
                   <button
                     onClick={(e) => {
-                      e.preventDefault();
-                      toggleModal?.()
+                      //e.preventDefault();
+                      toggleModal?.();
                       // setIsModalShowing?.(true);
                       window.scrollTo({
                         top: 0,
@@ -99,7 +143,7 @@ export default function Container({}: Props) {
                   </button>
                   <button
                     onClick={(e) => {
-                      e.preventDefault();
+                      //	e.preventDefault();
                       mintToken();
                       // setIsModalShowing?.(true);
                       // window.scrollTo({
@@ -107,7 +151,6 @@ export default function Container({}: Props) {
                       //   behavior: "smooth",
                       // });
                     }}
-                    type="submit"
                     className={`bg-[#69FF77] leading-10 font-medium text-lg disabled:bg-[#69FF77]/80 tracking-[-0.0225rem] hover:bg-[#69FF77]/80 w-40 text-center rounded-[6.25rem] p-[0.6rem] text-black`}
                   >
                     Proceed to mint
@@ -161,14 +204,29 @@ export default function Container({}: Props) {
           type="text"
           placeholder="Enter Mint address"
           value={mintAddress}
-          onChange={(e) => {
+          onChange={async (e) => {
             setMintAddress?.(e.target.value);
-            verifyAddress();
+            const IsParsable = denomIsParsable(e.target.value);
+            if (IsParsable) {
+              console.log("lll");
+            } else {
+              console.log("kkk");
+            }
+            const parsedDenom = parseDenom(e.target.value);
+            const tokenDetails = await fetchTokenDetails(parsedDenom);
+            console.log({ tokenDetails });
+
+            //	console.log({ tokenDetails });
+            if (tokenDetails) {
+              setTokenData(tokenDetails);
+              setAddressVerified(true);
+            } else {
+              console.log("Unable to fect token Details");
+            }
           }}
           isRequired={false}
         />
         <button
-          type="submit"
           disabled={mintAddress === ""}
           className="bg-[#69FF77] w-[4.7rem] border-[#51525C] border disabled:bg-[#69FF77]/50 tracking-[-0.00875rem] hover:bg-[#69FF77]/80 text-center rounded-[0.625rem] text-sm font-semibold py-[0.9rem] px-5 text-black"
         >
@@ -188,7 +246,7 @@ export default function Container({}: Props) {
                     Token name
                   </p>
                   <p className="text-sm tracking-[-0.00875rem] text-[#E4E4E7]">
-                    Kaze-bot
+                    {tokenData.name}
                   </p>
                 </section>
                 {/* Token symbol */}
@@ -201,7 +259,7 @@ export default function Container({}: Props) {
                       className="w-5 h-4"
                       width="0"
                       height="0"
-                      src="/logo.svg"
+                      src={tokenData.logo}
                       alt="token logo"
                     />
                   </p>
@@ -212,7 +270,7 @@ export default function Container({}: Props) {
                     Token decimals
                   </p>
                   <p className="text-sm tracking-[-0.00875rem] text-[#E4E4E7]">
-                    4
+                    {tokenData.decimals}
                   </p>
                 </section>
                 {/* Version */}
@@ -249,7 +307,7 @@ export default function Container({}: Props) {
             <button
               disabled={mintAmount === 0 || !mintAmount}
               onClick={(e: any) => {
-                e.preventDefault();
+                //	e.preventDefault();
                 window.scrollTo(0, 0);
                 // setIsModalShowing?.(true);
                 toggleModal?.();
@@ -257,7 +315,6 @@ export default function Container({}: Props) {
                   document.body.style.overflow = "hidden";
                 }
               }}
-              type="submit"
               className={`bg-white leading-10 text-lg disabled:bg-[#26272B] tracking-tight hover:bg-white/70 w-48 md:w-[14.25rem] text-center rounded-[6.25rem] md:text-2xl p-[0.6rem] text-black disabled:text-[#A0A0AB]`}
             >
               Mint tokens
@@ -265,6 +322,6 @@ export default function Container({}: Props) {
           </div>
         </div>
       )}
-    </form>
+    </div>
   );
 }

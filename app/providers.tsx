@@ -1,99 +1,77 @@
 "use client";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import {
+	CosmostationExtensionProvider,
+	KeplrExtensionProvider,
+	LeapCosmosExtensionProvider,
+	MetamaskExtensionProvider,
+	StationExtensionProvider,
+	XDEFICosmosExtensionProvider,
+	CosmostationMobileProvider,
+	KeplrMobileProvider,
+	LeapCosmosMobileProvider,
+	LeapMetamaskCosmosSnapExtensionProvider,
+	MetamaskMobileProvider,
+	ShuttleProvider,
+	OkxWalletExtensionProvider,
+	NinjiExtensionProvider,
+} from "@delphi-labs/shuttle-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
+import {
+	OSMOSIS_MAINNET,
+	MARS_MAINNET,
+	TERRA_MAINNET,
+	TERRA_TESTNET,
+	INJECTIVE_MAINNET,
+	INJECTIVE_TESTNET,
+	NEUTRON_MAINNET,
+	NEUTRON_TESTNET,
+} from "@/sdk/networks";
 import { useEffect } from "react";
-// import {
-//   RainbowKitProvider,
-//   getDefaultWallets,
-//   connectorsForWallets,
-//   darkTheme,
-// } from "@rainbow-me/rainbowkit";
-// import {
-//   argentWallet,
-//   trustWallet,
-//   ledgerWallet,
-// } from "@rainbow-me/rainbowkit/wallets";
-// import { configureChains, createConfig, WagmiConfig } from "wagmi";
-// import {
-//   mainnet,
-//   polygon,
-//   optimism,
-//   arbitrum,
-//   base,
-//   zora,
-//   goerli,
-//   optimismGoerli,
-// } from "wagmi/chains";
-// import { publicProvider } from "wagmi/providers/public";
-// // import { Web3GlobalProvider } from "./Web3GlobalProvider";
-// import { useEffect } from "react";
-
-// const { chains, publicClient, webSocketPublicClient } = configureChains(
-//   [
-//     mainnet,
-//     polygon,
-//     optimism,
-//     optimismGoerli,
-//     arbitrum,
-//     base,
-//     zora,
-//     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [goerli] : []),
-//   ],
-//   [publicProvider()]
-// );
-
-// const projectId = process?.env?.NEXT_PUBLIC_PROJECT_ID!;
-
-// const { wallets } = getDefaultWallets({
-//   appName: "Solimax launchpad",
-//   projectId,
-//   chains,
-// });
-
-// const demoAppInfo = {
-//   appName: "Solimax launchpad",
-// };
-
-// const connectors = connectorsForWallets([
-//   ...wallets,
-//   {
-//     groupName: "Other",
-//     wallets: [
-//       argentWallet({ projectId, chains }),
-//       trustWallet({ projectId, chains }),
-//       ledgerWallet({ projectId, chains }),
-//     ],
-//   },
-// ]);
-
-// const wagmiConfig = createConfig({
-//   autoConnect: true,
-//   connectors,
-//   publicClient,
-//   webSocketPublicClient,
-// });
+const extensionProviders = [
+	new KeplrExtensionProvider({
+		networks: [INJECTIVE_MAINNET, INJECTIVE_TESTNET],
+	}),
+	new CosmostationExtensionProvider({
+		networks: [INJECTIVE_MAINNET, INJECTIVE_TESTNET],
+	}),
+	new LeapCosmosExtensionProvider({
+		networks: [INJECTIVE_MAINNET, INJECTIVE_TESTNET],
+	}),
+	new LeapMetamaskCosmosSnapExtensionProvider({
+		networks: [INJECTIVE_MAINNET, INJECTIVE_TESTNET],
+	}),
+	new NinjiExtensionProvider({
+		networks: [INJECTIVE_MAINNET],
+	}),
+];
+const mobileProviders = [
+	new KeplrMobileProvider({
+		networks: [INJECTIVE_MAINNET, INJECTIVE_TESTNET],
+	}),
+	new LeapCosmosMobileProvider({
+		networks: [INJECTIVE_MAINNET, INJECTIVE_TESTNET],
+	}),
+];
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const mounted = useIsMounted();
+	const mounted = useIsMounted();
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1200,
-      easing: "ease-in",
-    });
-  }, []);
-  return mounted && <>{children}</>
-  // (
-    // <WagmiConfig config={wagmiConfig}>
-    //   <RainbowKitProvider
-    //     chains={chains}
-    //     appInfo={demoAppInfo}
-    //     theme={darkTheme()}
-    //     coolMode
-    //   >
-          // {mounted && children}
-    //   </RainbowKitProvider>
-    // </WagmiConfig>
-  // );
+	useEffect(() => {
+		AOS.init({
+			duration: 1200,
+			easing: "ease-in",
+		});
+	}, []);
+	return (
+		<ShuttleProvider
+			walletConnectProjectId={""}
+			mobileProviders={mobileProviders}
+			extensionProviders={extensionProviders}
+			persistent
+		>
+			{mounted && <>{children}</>}
+		</ShuttleProvider>
+	);
 }
