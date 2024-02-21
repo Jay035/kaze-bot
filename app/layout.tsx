@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import localFont from "next/font/local";
 import "aos/dist/aos.css";
 import BodyComponent from "./body";
+import { Providers } from "./providers";
+import { LaunchpadContextProvider } from "@/context/Context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -69,8 +71,12 @@ export default function RootLayout({
         />
       </head>
       <body className={`${aspekta.variable}`}>
-        <Navbar />
-        <BodyComponent>{children}</BodyComponent>
+        <Providers>
+          <LaunchpadContextProvider>
+            <Navbar />
+            <BodyComponent>{children}</BodyComponent>
+          </LaunchpadContextProvider>
+        </Providers>
       </body>
     </html>
   );
