@@ -159,6 +159,8 @@ export default function Container({}: any) {
                 </section>
               </div>
             </div>
+
+            
           </div>
           {/* Mint Authority */}
           <section className="">
