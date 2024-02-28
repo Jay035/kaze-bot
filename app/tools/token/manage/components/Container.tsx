@@ -80,15 +80,15 @@ export default function Container({}: any) {
           type="text"
           placeholder="Enter Mint address"
           value={mintAddress}
-          onChange={async (ee) => {
-            setMintAddress?.(ee.target.value);
-            const IsParsable = denomIsParsable(ee.target.value);
+          onChange={async (e) => {
+            setMintAddress?.(e.target.value);
+            const IsParsable = denomIsParsable(e.target.value);
             if (IsParsable) {
               console.log("lll");
             } else {
               console.log("kkk");
             }
-            const parsedDenom = parseDenom(ee.target.value);
+            const parsedDenom = parseDenom(e.target.value);
             const tokenDetails = await fetchTokenDetails(parsedDenom);
 
             //	console.log({ tokenDetails });
