@@ -56,7 +56,7 @@ export default function Navbar({}: Props) {
         className={` bg-[#1e1e1e] font-normal lg:relative px-4 absolute w-full h-screen z-[9999999] lg:gap-5 lg:bg-transparent lg:w-fit lg:h-fit flex flex-col lg:flex-row justify-center items-center transition-all ${
           menuOpen ? "left-0 top-0" : "-left-full lg:left-0"
         }`}
-      >
+          >
         <Link
           href="/tools"
           onClick={() => setMenuOpen((prevState) => !prevState)}
@@ -89,6 +89,14 @@ export default function Navbar({}: Props) {
             : " Disconnect Wallet"}
         </Link>
       </section>
+      <div className="flex space-x-[20px] ">
+      <section>
+        <Link href='/stake'>
+      <button className="bg-white hidden text-center lg:block text-lg w-[9rem] hover:border hover:border-white hover:bg-transparent hover:text-white sm:text-xl lg:text-2xl text-[#131313] rounded-[6.25rem] p-[0.6rem]">
+        Stake
+      </button>
+      </Link>
+      </section>
       <Link
         href={!wallet ? "/wallet" : "/#"}
         onClick={() =>
@@ -104,6 +112,7 @@ export default function Navbar({}: Props) {
           ? trimAddress(recentWallet?.account.address.toString())
           : " Disconnect Wallet"}
       </Link>
+      </div>
       {/* hamburger / Menu Icon */}
       <div
         className="z-[99999999] lg:hidden flex flex-col gap-1 items-center cursor-pointer "
@@ -128,6 +137,7 @@ export default function Navbar({}: Props) {
           }`}
         ></span>
       </div>
+      
     </nav>
   );
 }
