@@ -13,7 +13,7 @@ const Stake = () => {
         </video>
       </div>
       <div className=' flex justify-center items-center text-[50px] absolute top-1/2 z-0 -translate-y-1/2 left-[49.99%] -translate-x-1/2  '>
-        <div className='relative text-white top-1/2 -translate-y-[15%] max-w-[36rem] lg:max-w-[53rem] 2xl:max-w-[80rem] mx-auto'>
+        <div className='relative text-white top-1/2 -translate-y-[250%] max-w-[36rem] lg:max-w-[53rem] 2xl:max-w-[80rem] mx-auto'>
         <span className='hero-gradient-text font-extrabold '>
             STAKING
         </span>
