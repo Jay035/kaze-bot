@@ -77,12 +77,7 @@ export default function Navbar({}: Props) {
         >
           Documentation
         </a>
-        <a
-          href="mailto:soraaibase@gmail.com"
-          className="flex items-center justify-center w-full py-4 border-b border-white/25 lg:border-none hover:text-[#69FF77] hover:font-bold text-lg sm:text-xl lg:text-2xl tracking-[-0.03rem] text-center text-white "
-        >
-          Contact
-        </a>
+     
         <Link
           href="/wallet"
           onClick={() => setMenuOpen((prevState) => !prevState)}
