@@ -145,7 +145,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/temp/git-workspace/meme/kaze-bot/prisma/generated/client",
+      "value": "/home/iamdeborah/Documents/kaze-bot/prisma/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -154,7 +154,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
@@ -162,8 +162,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../..",
   "clientVersion": "5.7.1",
