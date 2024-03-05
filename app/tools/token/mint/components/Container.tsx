@@ -3,7 +3,7 @@ import CustomInput from "@/components/CustomInput";
 import Modal from "@/components/Modal";
 import { GlobalContext } from "@/context/Context";
 import useFetchTokenDetails from "@/hooks/useFetchTokenDetails";
-import { sendTransaction, signTransaction } from "@/sdk/SendInjTx";
+
 import { createInjTransactions } from "@/sdk/createTransactions";
 import { denomIsParsable, parseDenom } from "@/sdk/utils";
 import { WalletConnection } from "@delphi-labs/shuttle";
@@ -44,33 +44,33 @@ export default function Container({}: Props) {
 	}
 	const claims = useMarsClaim(recentWallet!);
 	const mintToken = async () => {
-		setMintingToken(true);
-		const tx = claims.createMsg(
-			parseDenom(mintAddress),
-			mintAmount.toString()
-		);
-		const createResponse = await createInjTransactions(
-			tx,
-			recentWallet?.account.address!
-		);
-		if (createResponse && recentWallet) {
-			// const txResPonse = await signTransaction(
-			// 	createResponse?.txRaw,
-			// 	createResponse.accountNumber.accountNumber,
-			// 	recentWallet?.account.address
-			// );
-			// console.log(txResPonse);
-			const txReciept = await sendTransaction(
-				tx,
-				recentWallet?.account.address
-			);
-			console.log({ txReciept });
-		} else {
-			console.log("Undefined Variaables");
-		}
-		setTimeout(() => {
-			setIsMintSuccessful(true);
-		}, 2000);
+		// setMintingToken(true);
+		// const tx = claims.createMsg(
+		// 	parseDenom(mintAddress),
+		// 	mintAmount.toString()
+		// );
+		// const createResponse = await createInjTransactions(
+		// 	tx,
+		// 	recentWallet?.account.address!
+		// );
+		// if (createResponse && recentWallet) {
+		// 	// const txResPonse = await signTransaction(
+		// 	// 	createResponse?.txRaw,
+		// 	// 	createResponse.accountNumber.accountNumber,
+		// 	// 	recentWallet?.account.address
+		// 	// );
+		// 	// console.log(txResPonse);
+		// 	const txReciept = await sendTransaction(
+		// 		tx,
+		// 		recentWallet?.account.address
+		// 	);
+		// 	console.log({ txReciept });
+		// } else {
+		// 	console.log("Undefined Variaables");
+		// }
+		// setTimeout(() => {
+		// 	setIsMintSuccessful(true);
+		// }, 2000);
 	};
 
 	return (

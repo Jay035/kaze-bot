@@ -17,28 +17,28 @@ export const walletStrategy = new WalletStrategy({
 });
 
 // Sign an Injective transaction
-export const signTransaction = async (
-	tx: TxRaw,
-	accountNumber: number,
-	address: string
-): Promise<any> => {
-	const response = await walletStrategy.signCosmosTransaction({
-		txRaw: tx,
-		accountNumber,
-		address,
-		chainId: ChainId.Mainnet,
-	});
+// export const signTransaction = async (
+// 	tx: TxRaw,
+// 	accountNumber: number,
+// 	address: string
+// ): Promise<any> => {
+// 	const response = await walletStrategy.signCosmosTransaction({
+// 		txRaw: tx,
+// 		accountNumber,
+// 		address,
+// 		chainId: ChainId.Mainnet,
+// 	});
 
-	return response.signature.signature;
-};
+// 	return response.signature.signature;
+// };
 
-// Send an Injective transaction
-export const sendTransaction = async (msg: any, address: any): Promise<any> => {
-	const res = new MsgBroadcaster({
-		network: Network.Mainnet,
-		walletStrategy: walletStrategy,
-	}).broadcast({ address, msgs: msg });
-	// create const name u
+// // Send an Injective transaction
+// export const sendTransaction = async (msg: any, address: any): Promise<any> => {
+// 	const res = new MsgBroadcaster({
+// 		network: Network.Mainnet,
+// 		walletStrategy: walletStrategy,
+// 	}).broadcast({ address, msgs: msg });
+// 	// create const name u
 
-	return res;
-};
+// 	return res;
+// };

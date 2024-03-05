@@ -23,7 +23,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Network } from "@injectivelabs/networks";
 import { createInjTransactions } from "@/sdk/createTransactions";
-import { sendTransaction, signTransaction } from "@/sdk/SendInjTx";
+// import { sendTransaction, signTransaction } from "@/sdk/SendInjTx";
 const chainId = "injective-1";
 
 export default function Container({}: any) {
@@ -49,20 +49,20 @@ export default function Container({}: any) {
 	}
 	const claims = useMarsClaim(recentWallet!);
 	const revokeAuthority = async () => {
-		const tx = claims.createMsg(mintAddress);
-		const createResponse = await createInjTransactions(
-			tx,
-			recentWallet?.account.address!
-		);
-		if (createResponse && recentWallet) {
-			await signTransaction(
-				createResponse?.txRaw,
-				createResponse.accountNumber.accountNumber,
-				recentWallet?.account.address
-			);
-		} else {
-			console.log("Undefined Variaables");
-		}
+		// const tx = claims.createMsg(mintAddress);
+		// const createResponse = await createInjTransactions(
+		// 	tx,
+		// 	recentWallet?.account.address!
+		// );
+		// if (createResponse && recentWallet) {
+		// 	await signTransaction(
+		// 		createResponse?.txRaw,
+		// 		createResponse.accountNumber.accountNumber,
+		// 		recentWallet?.account.address
+		// 	);
+		// } else {
+		// 	console.log("Undefined Variaables");
+		// }
 	};
 
 	const verifyAddress = () => {

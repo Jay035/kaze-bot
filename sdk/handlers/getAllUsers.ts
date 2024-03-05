@@ -15,6 +15,14 @@ function objectModifier(object: any, fieldName: string, value: any) {
 }
 export async function GetAllUsers(nextSkip: number) {
 	const prisma = new PrismaClient();
+	// Todo - put the get all user endpoints here
+	/**
+	 * this is the api endpoint
+	 * https://kaze-api.onrender.com/api/users
+	 *
+	 * with query for pagination
+	 * https://kaze-api.onrender.com/api/users?nextSkip=20
+	 */
 	try {
 		let res = await getAllUsers(nextSkip);
 		//	console.log({ res });
