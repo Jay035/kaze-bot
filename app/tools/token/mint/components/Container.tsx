@@ -3,7 +3,7 @@ import CustomInput from "@/components/CustomInput";
 import Modal from "@/components/Modal";
 import { GlobalContext } from "@/context/Context";
 import useFetchTokenDetails from "@/hooks/useFetchTokenDetails";
-import { sendTransaction, signTransaction } from "@/sdk/SendInjTx";
+
 import { createInjTransactions } from "@/sdk/createTransactions";
 import { denomIsParsable, parseDenom } from "@/sdk/utils";
 import { WalletConnection } from "@delphi-labs/shuttle";
@@ -25,50 +25,54 @@ export default function Container({}: Props) {
   const [mintingToken, setMintingToken] = useState(false);
   const [isMintSuccessful, setIsMintSuccessful] = useState(false);
 
-  const verifyAddress = () => {
-    setAddressVerified(true);
-  };
-  function useMarsClaim(wallet: WalletConnection) {
-    function createMsg(denom: string, amount: string) {
-      return [
-        new MsgMint({
-          sender: recentWallet?.account.address.toString()!,
-          amount: {
-            denom,
-            amount,
-          },
-        }),
-      ];
-    }
-    return { createMsg };
-  }
-  const claims = useMarsClaim(recentWallet!);
-  const mintToken = async () => {
-    setMintingToken(true);
-    const tx = claims.createMsg(parseDenom(mintAddress), mintAmount.toString());
-    const createResponse = await createInjTransactions(
-      tx,
-      recentWallet?.account.address!
-    );
-    if (createResponse && recentWallet) {
-      // const txResPonse = await signTransaction(
-      // 	createResponse?.txRaw,
-      // 	createResponse.accountNumber.accountNumber,
-      // 	recentWallet?.account.address
-      // );
-      // console.log(txResPonse);
-      const txReciept = await sendTransaction(
-        tx,
-        recentWallet?.account.address
-      );
-      console.log({ txReciept });
-    } else {
-      console.log("Undefined Variaables");
-    }
-    setTimeout(() => {
-      setIsMintSuccessful(true);
-    }, 2000);
-  };
+	const verifyAddress = () => {
+		setAddressVerified(true);
+	};
+	function useMarsClaim(wallet: WalletConnection) {
+		function createMsg(denom: string, amount: string) {
+			return [
+				new MsgMint({
+					sender: recentWallet?.account.address.toString()!,
+					amount: {
+						denom,
+						amount,
+					},
+				}),
+			];
+		}
+		return { createMsg };
+	}
+	const claims = useMarsClaim(recentWallet!);
+	const mintToken = async () => {
+		// setMintingToken(true);
+		// const tx = claims.createMsg(
+		// 	parseDenom(mintAddress),
+		// 	mintAmount.toString()
+		// );
+		// const createResponse = await createInjTransactions(
+		// 	tx,
+		// 	recentWallet?.account.address!
+		// );
+		// if (createResponse && recentWallet) {
+		// 	// const txResPonse = await signTransaction(
+		// 	// 	createResponse?.txRaw,
+		// 	// 	createResponse.accountNumber.accountNumber,
+		// 	// 	recentWallet?.account.address
+		// 	// );
+		// 	// console.log(txResPonse);
+		// 	const txReciept = await sendTransaction(
+		// 		tx,
+		// 		recentWallet?.account.address
+		// 	);
+		// 	console.log({ txReciept });
+		// } else {
+		// 	console.log("Undefined Variaables");
+		// }
+		// setTimeout(() => {
+		// 	setIsMintSuccessful(true);
+		// }, 2000);
+	};
+
 
   return (
     <div className="flex flex-col gap-8 mb-28 lg:mb-32">
