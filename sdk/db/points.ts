@@ -1,6 +1,6 @@
 import { prisma } from "../";
 
-export async function getAllPoints(tgId: string) {
+export async function getPointsByTgId(tgId: string) {
 	return await prisma.points.findUnique({
 		select: { points: true, tgId: true },
 		where: { tgId },
