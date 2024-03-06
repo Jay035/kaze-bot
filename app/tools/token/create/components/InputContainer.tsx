@@ -1,14 +1,15 @@
 "use client";
 import CustomFileDropbox from "@/components/CustomFileDropbox";
 import CustomInput from "@/components/CustomInput";
-import Redirect from "@/components/RedirectButton";
 import { GlobalContext } from "@/context/Context";
-import { useRef, useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {};
 
 export default function InputContainer({}: Props) {
-  const {onButtonClick} = GlobalContext();
+  const { fileSRC, setFileSRC } = GlobalContext();
   const [tokenName, setTokenName] = useState<string>("");
   const [tokenLogo, setTokenLogo] = useState<File | null>();
   const [tokenSymbol, setTokenSymbol] = useState<string>("");
@@ -16,6 +17,7 @@ export default function InputContainer({}: Props) {
   const [tokenSupply, setTokenSupply] = useState<string>("");
   const [tokenDecimals, setTokenDecimals] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const router = useRouter();
 
   const inputRef = useRef<any>(null);
   const handleFileSelected = (file: File | null) => {
@@ -27,12 +29,13 @@ export default function InputContainer({}: Props) {
     setTokenLogo?.(null);
   };
 
-  
-
   return (
     <form className="text-[#E4E4E7] flex flex-col gap-6">
       {/* LOGO */}
-      <div className="tracking-[-0.01rem] flex flex-col gap-[0.62rem]">
+      <div
+        id="logo-container"
+        className="tracking-[-0.01rem] flex flex-col gap-[0.62rem]"
+      >
         <p>
           Logo (attach document)<span className="text-[#F04438]">*</span>
         </p>
@@ -42,16 +45,20 @@ export default function InputContainer({}: Props) {
           selectedFile={tokenLogo!}
           removeFile={removeFile}
           onFileSelected={handleFileSelected}
+          // imageDimensionSupported={imageDimensionSupported}
           // onButtonClick={onButtonClick}
         />
-        {/* {tokenLogo && (
-          <button
-            className="text-[#69FF77] cursor-pointer w-fit "
-            onClick={onButtonClick}
-          >
-            Change file
-          </button>
-        )} */}
+        {tokenLogo && (
+          // <Image
+          //   id="preview-image"
+          //   width="0"
+          //   height="0"
+          //   className="w-20 md:w-28 h-20 md:h-28"
+          //   src="#"
+          //   alt="file preview"
+          // />
+          <img id="preview-image" src="#" alt="example image" />
+        )}
         <p className="text-xs tracking-[-0.0075rem] text-[#D1D1D6]">
           SVG, PNG, JPG or GIF (max. 400x400px)
         </p>
@@ -136,14 +143,14 @@ export default function InputContainer({}: Props) {
 
       <div className="flex gap-6 mt-10 md:items-center justify-end">
         <button
-          onClick={Redirect}
+          onClick={() => router.back()}
           className="text-[#A0A0AB] text-lg leading-10 tracking-tight w-[7.375rem] text-center rounded-[0.625rem] md:text-2xl"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="bg-white leading-10] disabled:bg-[#26272B] tracking-tight hover:bg-[#26272B] md:w-[14.25rem] text-center rounded-[6.25rem] text-lg w-48 md:text-2xl p-[0.6rem] text-black disabled:text-[#A0A0AB]"
+          className="bg-white leading-10] disabled:bg-[#26272B] hover:text-white tracking-tight hover:bg-[#26272B] md:w-[14.25rem] text-center rounded-[6.25rem] text-lg w-48 md:text-2xl p-[0.6rem] text-black disabled:text-[#A0A0AB]"
         >
           Create token
         </button>

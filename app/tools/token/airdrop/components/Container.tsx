@@ -152,7 +152,7 @@ export default function Container({}: Props) {
           </div>
         )}
       </Modal>
-      <form className="flex flex-col gap-8">
+      <div className="flex flex-col gap-8">
         <CustomInput
           id="mintAddress"
           className="flex flex-col gap-[0.62rem]"
@@ -168,13 +168,12 @@ export default function Container({}: Props) {
           isRequired={false}
         />
         <button
-          type="submit"
           disabled={mintAddress === ""}
           className="bg-[#69FF77] w-[4.7rem] border-[#51525C] border disabled:bg-[#69FF77]/50 tracking-[-0.00875rem] hover:bg-[#69FF77]/80 text-center rounded-[0.625rem] text-sm font-semibold py-[0.9rem] px-5 text-black"
         >
           Load
         </button>
-      </form>
+      </div>
       {/* Token information */}
       {addressVerified && (
         <div className="flex flex-col gap-8">

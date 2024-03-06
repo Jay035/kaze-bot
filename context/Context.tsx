@@ -18,6 +18,7 @@ type Props = {
 
 export function LaunchpadContextProvider({ children }: Props) {
   const [isModalShowing, setIsModalShowing] = useState(false);
+  const [fileSRC, setFileSRC] = useState<string>("");
   const [showModal, setShowModal] = useState<boolean>(false);
 
   function toggleModal() {
@@ -30,6 +31,8 @@ export function LaunchpadContextProvider({ children }: Props) {
 
   const value = {
     onButtonClick,
+    fileSRC,
+    setFileSRC,
     isModalShowing,
     setIsModalShowing,
     showModal,
